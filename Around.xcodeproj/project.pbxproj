@@ -16,10 +16,6 @@
 		5C7BF0751B1C0CA600FEA569 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BF0741B1C0CA600FEA569 /* Constants.swift */; };
 		5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAED1B1C227100E202C2 /* MapViewController.swift */; };
 		5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C91BAEE1B1C227100E202C2 /* MapViewController.xib */; };
-		5C91BAF41B1C33BD00E202C2 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAF21B1C33BD00E202C2 /* TutorialViewController.swift */; };
-		5C91BAF51B1C33BD00E202C2 /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C91BAF31B1C33BD00E202C2 /* TutorialViewController.xib */; };
-		5C91BAF81B1C36E300E202C2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAF61B1C36E300E202C2 /* LoginViewController.swift */; };
-		5C91BAF91B1C36E300E202C2 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C91BAF71B1C36E300E202C2 /* LoginViewController.xib */; };
 		5C91BAFB1B1C3C2800E202C2 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,10 +45,6 @@
 		5C91BAED1B1C227100E202C2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5C91BAEE1B1C227100E202C2 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		5C91BAF11B1C24C600E202C2 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
-		5C91BAF21B1C33BD00E202C2 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
-		5C91BAF31B1C33BD00E202C2 /* TutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
-		5C91BAF61B1C36E300E202C2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5C91BAF71B1C36E300E202C2 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		6FA9694D810C1F5BEF212822 /* libPods-Around.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Around.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -109,10 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				5C448A311B1BFC55001DBE6C /* AppDelegate.swift */,
-				5C91BAF61B1C36E300E202C2 /* LoginViewController.swift */,
-				5C91BAF71B1C36E300E202C2 /* LoginViewController.xib */,
-				5C91BAF21B1C33BD00E202C2 /* TutorialViewController.swift */,
-				5C91BAF31B1C33BD00E202C2 /* TutorialViewController.xib */,
 				5C91BAF11B1C24C600E202C2 /* Bridge.h */,
 				5C448A331B1BFC55001DBE6C /* ViewController.swift */,
 				5C91BAED1B1C227100E202C2 /* MapViewController.swift */,
@@ -241,10 +229,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C91BAF91B1C36E300E202C2 /* LoginViewController.xib in Resources */,
 				5C448A3C1B1BFC55001DBE6C /* LaunchScreen.xib in Resources */,
 				5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */,
-				5C91BAF51B1C33BD00E202C2 /* TutorialViewController.xib in Resources */,
 				5C448A391B1BFC55001DBE6C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,10 +283,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C91BAFB1B1C3C2800E202C2 /* ViewUtils.swift in Sources */,
-				5C91BAF81B1C36E300E202C2 /* LoginViewController.swift in Sources */,
 				5C448A341B1BFC55001DBE6C /* ViewController.swift in Sources */,
 				5C448A321B1BFC55001DBE6C /* AppDelegate.swift in Sources */,
-				5C91BAF41B1C33BD00E202C2 /* TutorialViewController.swift in Sources */,
 				5C7BF0751B1C0CA600FEA569 /* Constants.swift in Sources */,
 				5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */,
 			);
