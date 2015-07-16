@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 
 func imageNavBarBackground() -> UIImage {
@@ -20,4 +21,17 @@ func imageNavBarBackground() -> UIImage {
     let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     return image
+}
+
+func getCoordinateFromMapRectanglePoint(x: Double, y: Double) -> CLLocationCoordinate2D {
+  let point: MKMapPoint = MKMapPoint(x: x, y: y)
+  return MKCoordinateForMapPoint(point)
+}
+
+func northWestCoordinate(mapRect: MKMapRect) -> CLLocationCoordinate2D {
+  return getCoordinateFromMapRectanglePoint(MKMapRectGetMaxX(mapRect), mapRect.origin.y);
+}
+
+func southEastCoordinate(mapRect: MKMapRect) -> CLLocationCoordinate2D {
+  return getCoordinateFromMapRectanglePoint(mapRect.origin.x, MKMapRectGetMaxY(mapRect))
 }

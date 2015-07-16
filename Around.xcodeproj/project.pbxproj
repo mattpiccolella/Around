@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		415BE2E0346E4F166CD31F4E /* libPods-Around.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA9694D810C1F5BEF212822 /* libPods-Around.a */; };
+		5C0AD0A01B57630F005D667B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0AD09F1B57630F005D667B /* BaseViewController.swift */; };
 		5C448A321B1BFC55001DBE6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448A311B1BFC55001DBE6C /* AppDelegate.swift */; };
-		5C448A341B1BFC55001DBE6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448A331B1BFC55001DBE6C /* ViewController.swift */; };
 		5C448A391B1BFC55001DBE6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C448A381B1BFC55001DBE6C /* Images.xcassets */; };
 		5C448A3C1B1BFC55001DBE6C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C448A3A1B1BFC55001DBE6C /* LaunchScreen.xib */; };
 		5C448A481B1BFC55001DBE6C /* AroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448A471B1BFC55001DBE6C /* AroundTests.swift */; };
@@ -17,6 +17,12 @@
 		5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAED1B1C227100E202C2 /* MapViewController.swift */; };
 		5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C91BAEE1B1C227100E202C2 /* MapViewController.xib */; };
 		5C91BAFB1B1C3C2800E202C2 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */; };
+		5CE3A1D81B5765F70073E984 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CE3A1D41B5765F70073E984 /* OpenSans-Bold.ttf */; };
+		5CE3A1D91B5765F70073E984 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CE3A1D51B5765F70073E984 /* OpenSans-Light.ttf */; };
+		5CE3A1DA1B5765F70073E984 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CE3A1D61B5765F70073E984 /* OpenSans-Regular.ttf */; };
+		5CE3A1DB1B5765F70073E984 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CE3A1D71B5765F70073E984 /* OpenSans-Semibold.ttf */; };
+		5CE3A1DE1B5766940073E984 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3A1DD1B5766940073E984 /* Styles.swift */; };
+		5CE3A1E11B578F1F0073E984 /* QueryUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3A1E01B578F1F0073E984 /* QueryUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,10 +38,10 @@
 /* Begin PBXFileReference section */
 		092F0D1FF431804BC1B0F158 /* Pods-Around.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Around.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Around/Pods-Around.debug.xcconfig"; sourceTree = "<group>"; };
 		4DEA62534D4F1999D22731AB /* Pods-Around.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Around.release.xcconfig"; path = "Pods/Target Support Files/Pods-Around/Pods-Around.release.xcconfig"; sourceTree = "<group>"; };
+		5C0AD09F1B57630F005D667B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5C448A2C1B1BFC55001DBE6C /* Around.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Around.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C448A301B1BFC55001DBE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C448A311B1BFC55001DBE6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5C448A331B1BFC55001DBE6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5C448A381B1BFC55001DBE6C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5C448A3B1B1BFC55001DBE6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5C448A411B1BFC55001DBE6C /* AroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +52,12 @@
 		5C91BAEE1B1C227100E202C2 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		5C91BAF11B1C24C600E202C2 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		5CE3A1D41B5765F70073E984 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		5CE3A1D51B5765F70073E984 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		5CE3A1D61B5765F70073E984 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		5CE3A1D71B5765F70073E984 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		5CE3A1DD1B5766940073E984 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		5CE3A1E01B578F1F0073E984 /* QueryUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryUtils.swift; sourceTree = "<group>"; };
 		6FA9694D810C1F5BEF212822 /* libPods-Around.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Around.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -100,13 +112,11 @@
 		5C448A2E1B1BFC55001DBE6C /* Around */ = {
 			isa = PBXGroup;
 			children = (
+				5CE3A1DF1B578F110073E984 /* Utils */,
+				5CE3A1DC1B5766690073E984 /* Common */,
 				5C448A311B1BFC55001DBE6C /* AppDelegate.swift */,
-				5C91BAF11B1C24C600E202C2 /* Bridge.h */,
-				5C448A331B1BFC55001DBE6C /* ViewController.swift */,
 				5C91BAED1B1C227100E202C2 /* MapViewController.swift */,
-				5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */,
 				5C91BAEE1B1C227100E202C2 /* MapViewController.xib */,
-				5C7BF0741B1C0CA600FEA569 /* Constants.swift */,
 				5C448A381B1BFC55001DBE6C /* Images.xcassets */,
 				5C448A3A1B1BFC55001DBE6C /* LaunchScreen.xib */,
 				5C448A2F1B1BFC55001DBE6C /* Supporting Files */,
@@ -117,6 +127,7 @@
 		5C448A2F1B1BFC55001DBE6C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5CE3A1D31B5765E00073E984 /* Fonts */,
 				5C448A301B1BFC55001DBE6C /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -137,6 +148,37 @@
 				5C448A461B1BFC55001DBE6C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5CE3A1D31B5765E00073E984 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5CE3A1D41B5765F70073E984 /* OpenSans-Bold.ttf */,
+				5CE3A1D51B5765F70073E984 /* OpenSans-Light.ttf */,
+				5CE3A1D61B5765F70073E984 /* OpenSans-Regular.ttf */,
+				5CE3A1D71B5765F70073E984 /* OpenSans-Semibold.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		5CE3A1DC1B5766690073E984 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5C91BAF11B1C24C600E202C2 /* Bridge.h */,
+				5C7BF0741B1C0CA600FEA569 /* Constants.swift */,
+				5C0AD09F1B57630F005D667B /* BaseViewController.swift */,
+				5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */,
+				5CE3A1DD1B5766940073E984 /* Styles.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		5CE3A1DF1B578F110073E984 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5CE3A1E01B578F1F0073E984 /* QueryUtils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		BA22C8E6260C33959B921296 /* Frameworks */ = {
@@ -231,6 +273,10 @@
 			files = (
 				5C448A3C1B1BFC55001DBE6C /* LaunchScreen.xib in Resources */,
 				5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */,
+				5CE3A1D81B5765F70073E984 /* OpenSans-Bold.ttf in Resources */,
+				5CE3A1D91B5765F70073E984 /* OpenSans-Light.ttf in Resources */,
+				5CE3A1DA1B5765F70073E984 /* OpenSans-Regular.ttf in Resources */,
+				5CE3A1DB1B5765F70073E984 /* OpenSans-Semibold.ttf in Resources */,
 				5C448A391B1BFC55001DBE6C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,10 +329,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C91BAFB1B1C3C2800E202C2 /* ViewUtils.swift in Sources */,
-				5C448A341B1BFC55001DBE6C /* ViewController.swift in Sources */,
 				5C448A321B1BFC55001DBE6C /* AppDelegate.swift in Sources */,
+				5CE3A1E11B578F1F0073E984 /* QueryUtils.swift in Sources */,
 				5C7BF0751B1C0CA600FEA569 /* Constants.swift in Sources */,
+				5CE3A1DE1B5766940073E984 /* Styles.swift in Sources */,
 				5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */,
+				5C0AD0A01B57630F005D667B /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,3 +22,7 @@ struct ParseInfo {
     static let user = "User"
     static let userId = "userId"
 }
+
+struct Global {
+  static let Delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+}
