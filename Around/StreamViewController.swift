@@ -11,6 +11,7 @@ import UIKit
 class StreamViewController: BaseViewController {
   
   @IBOutlet var collectionView: UICollectionView!
+  var refreshControl: UIRefreshControl!
 
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -37,6 +38,11 @@ class StreamViewController: BaseViewController {
     collectionView.delegate = self
     collectionView.registerNib(UINib(nibName: "StreamItemCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: StreamItemCell.reuseIdentifier)
     collectionView.bounces = true
+    collectionView.alwaysBounceVertical = true
+    
+    refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: "refreshStreamItems", forControlEvents: .ValueChanged)
+    collectionView.addSubview(refreshControl)
   }
   
   func setupFlowLayout() {
@@ -48,7 +54,7 @@ class StreamViewController: BaseViewController {
   }
   
   override func leftBarButtonItem() -> UIBarButtonItem {
-    let listImage: UIImage = UIImage(named: "Stream")!
+    let listImage: UIImage = UIImage(named: "Map")!
     let button: UIButton = barButtonImage(listImage)
     let leftBarButton: UIBarButtonItem = UIBarButtonItem(image: listImage, style: .Done, target: self, action: "leftButtonPushed")
     return leftBarButton
@@ -71,6 +77,13 @@ class StreamViewController: BaseViewController {
   
   func rightButtonPushed() {
     // TODO: Show login view controller.
+  }
+  
+  func refreshStreamItems() {
+    fetchNewStreamItems { () -> Void in
+      self.refreshControl.endRefreshing()
+      self.collectionView.reloadData()
+    }
   }
 }
 

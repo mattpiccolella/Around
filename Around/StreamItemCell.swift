@@ -32,7 +32,11 @@ class StreamItemCell: UICollectionViewCell {
     postDescription.lineBreakMode = NSLineBreakMode.ByWordWrapping
     userName.font = Styles.Fonts.Body.Normal.Medium
     timeRemaining.font = Styles.Fonts.Body.Normal.Medium
+    timeRemaining.textColor = View.AppColor
     distanceLabel.font = Styles.Fonts.Body.Normal.Medium
+    distanceLabel.textColor = View.AppColor
+    userPhoto.layer.cornerRadius = userPhotoHeight / 2.0
+    userPhoto.layer.masksToBounds = true
   }
   
   func inflate(streamItem: PFObject) {

@@ -6,10 +6,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeStreamItemViewController" customModule="Around" customModuleProvider="target">
             <connections>
+                <outlet property="addPhotoIcon" destination="bfa-5o-dH4" id="Ytp-OE-6ok"/>
+                <outlet property="addPhotoLabel" destination="yi6-9U-xtl" id="2it-QK-j5a"/>
                 <outlet property="addPhotoView" destination="zTh-CS-6xk" id="SFG-GF-b44"/>
                 <outlet property="bottomConstraint" destination="HQq-Gk-XYE" id="Mps-5v-oDr"/>
                 <outlet property="mapView" destination="Vfe-qx-BhM" id="kdw-NG-e4J"/>
                 <outlet property="textView" destination="Dtv-dY-zdv" id="Dk1-Kv-hkg"/>
+                <outlet property="timeRemainingLabel" destination="E4q-RW-36e" id="g7l-38-P1A"/>
                 <outlet property="timeRemainingView" destination="8bE-m8-z4b" id="5Z9-56-hdS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -41,4 +41,8 @@ struct Styles {
       }
     }
   }
+  
+  struct Colors {
+    static let GrayLabel = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0)
+  }
 }

@@ -134,8 +134,6 @@ extension MapViewController: CLLocationManagerDelegate {
       appDelegate.minPoint = northWestCoordinate(mapView.visibleMapRect)
       appDelegate.maxPoint = southEastCoordinate(mapView.visibleMapRect)
       loadInitialStreamItems()
-    } else {
-      
     }
   }
   

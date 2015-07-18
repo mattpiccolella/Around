@@ -17,3 +17,14 @@ func stringForRemainingTime(numberOfMinutes: Int) -> String {
     return "\(numberOfMinutes / 60)h"
   }
 }
+
+func remainingTimeString(numberOfMinutes: Int) -> String {
+  if numberOfMinutes < 0 {
+    return "0 min"
+  } else if numberOfMinutes < 60 {
+    return "\(numberOfMinutes) min"
+  } else {
+    let hours = numberOfMinutes / 60
+    return "\(hours) hr \(numberOfMinutes - (hours * 60)) min"
+  }
+}
