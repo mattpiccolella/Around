@@ -27,6 +27,9 @@
                     <state key="normal" image="Pinpoint">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="composeButtonPressed:" destination="-1" eventType="touchUpInside" id="9nc-ZT-Vue"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl2-eD-Bqa">
                     <rect key="frame" x="505" y="535" width="95" height="95"/>

@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var shouldRefreshStreamItems: Bool = false
   var minPoint: CLLocationCoordinate2D?
   var maxPoint: CLLocationCoordinate2D?
+  
+  var mapViewController: MapViewController!
+  var streamViewController: StreamViewController!
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // MARK: Parse configuration
@@ -29,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     // MARK: UI configuration
     UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+    
+    mapViewController = MapViewController(nibName: "MapViewController", bundle: nil)
+    streamViewController = StreamViewController(nibName: "StreamViewController", bundle: nil)
         
     let rootViewController: UIViewController
     // MARK: Check for login credentials
@@ -40,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       })
       rootViewController = loggedInView()
     } else {
+      // TODO: Switch this.
       rootViewController = loggedInView()
     }
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -53,8 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func loggedInView() -> UIViewController {
     let mapViewController: MapViewController = MapViewController(nibName: "MapViewController", bundle: nil)
     let navController: UINavigationController = UINavigationController(rootViewController: mapViewController)
-    navController.navigationBar.barTintColor = View.AppColor
-    navController.navigationBar.tintColor = UIColor.whiteColor()
     return navController
   }
     

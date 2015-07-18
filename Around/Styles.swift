@@ -10,26 +10,35 @@ import Foundation
 
 struct Styles {
   struct Fonts {
-
-    struct Light {
-      static let fontName = "OpenSans-Light"
-      static let Medium = UIFont(name: fontName, size: 20.0)
+    struct Title {
+      struct Light {
+        static let fontName = "OpenSans-Light"
+        static let Medium = UIFont(name: fontName, size: 20.0)
+      }
+      
+      struct Normal {
+        static let fontName = "OpenSans-Regular"
+        static let Medium = UIFont(name: fontName, size: 20.0)
+        static let Large = UIFont(name: fontName, size: 30.0)
+      }
+      
+      struct SemiBold {
+        static let fontName = "OpenSans-Semibold"
+        static let Medium = UIFont(name: fontName, size: 20.0)
+      }
+      
+      struct Bold {
+        static let fontName = "OpenSans-Bold"
+        static let Medium = UIFont(name: fontName, size: 20.0)
+      }
     }
-  
-    struct Normal {
-      static let fontName = "OpenSans-Regular"
-      static let Medium = UIFont(name: fontName, size: 20.0)
-      static let Large = UIFont(name: fontName, size: 40.0)
-    }
-  
-    struct SemiBold {
-      static let fontName = "OpenSans-Semibold"
-      static let Medium = UIFont(name: fontName, size: 20.0)
-    }
-  
-    struct Bold {
-      static let fontName = "OpenSans-Bold"
-      static let Medium = UIFont(name: fontName, size: 20.0)
+    
+    struct Body {
+      struct Normal {
+        static let fontName = "AvenirNext-Regular"
+        static let Medium = UIFont(name: fontName, size: 14.0)
+        static let Large = UIFont(name: fontName, size: 16.0)
+      }
     }
   }
 }

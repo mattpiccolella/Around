@@ -9,11 +9,12 @@
 import UIKit
 import MapKit
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate {
+class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
   @IBOutlet var mapView: MKMapView!
   
   private var hasLoadedInitialMarkers: Bool = false
+  private let annotationReuseIdentifier: String = "customAnnotationId"
   var postSelected: Bool = false
   
   var locationManager: CLLocationManager = CLLocationManager()
@@ -32,7 +33,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
     formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
     locationManager.delegate = self
     locationManager.startUpdatingLocation()
-    
+    mapView.delegate = self
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -85,13 +86,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
   // MARK: Navigation bar setup.
 
   override func leftButtonPushed() {
-    // TODO: Go to stream.
+    self.navigationController?.setViewControllers([appDelegate.streamViewController], animated: false)
   }
 
   override func leftBarButtonItem() -> UIBarButtonItem {
     let listImage: UIImage = UIImage(named: "Stream")!
     let button: UIButton = barButtonImage(listImage)
-    button.addTarget(self, action: "leftButtonPushed", forControlEvents: .TouchUpInside)
     let leftBarButton: UIBarButtonItem = UIBarButtonItem(image: listImage, style: .Done, target: self, action: "leftButtonPushed")
     return leftBarButton
   }
@@ -115,6 +115,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate {
     if let coordinate = appDelegate.location?.coordinate {
       mapView.setCenterCoordinate(coordinate, animated: true)
     }
+  }
+
+  @IBAction func composeButtonPressed(sender: AnyObject) {
+    let composeView: ComposeStreamItemViewController = ComposeStreamItemViewController(nibName: "ComposeStreamItemViewController", bundle: nil)
+    navigationController?.pushViewController(composeView, animated: true)
   }
 }
 
@@ -140,5 +145,31 @@ extension MapViewController: CLLocationManagerDelegate {
   
   func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
     // TODO: Handle error.
+  }
+}
+
+extension MapViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    if !annotation.isKindOfClass(MKUserLocation.self) {
+      if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
+        pinView.annotation = annotation
+        return pinView
+      } else {
+        let newPinView: MKAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
+        newPinView.canShowCallout = true
+        newPinView.image = UIImage(named: "Marker")
+        return newPinView
+      }
+    } else {
+      return nil
+    }
+  }
+  
+  func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    // TODO: Make the view appear.
+  }
+  
+  func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
+    // TODO: Make the view disappear.
   }
 }

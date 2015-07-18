@@ -17,6 +17,13 @@
 		5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAED1B1C227100E202C2 /* MapViewController.swift */; };
 		5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C91BAEE1B1C227100E202C2 /* MapViewController.xib */; };
 		5C91BAFB1B1C3C2800E202C2 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */; };
+		5CDFC26A1B59F70C00C49C34 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDFC2681B59F70C00C49C34 /* StreamViewController.swift */; };
+		5CDFC26B1B59F70C00C49C34 /* StreamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDFC2691B59F70C00C49C34 /* StreamViewController.xib */; };
+		5CDFC2741B59FC9300C49C34 /* StreamItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDFC2721B59FC9300C49C34 /* StreamItemCell.swift */; };
+		5CDFC2751B59FC9300C49C34 /* StreamItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDFC2731B59FC9300C49C34 /* StreamItemCell.xib */; };
+		5CDFC2771B5A07F400C49C34 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDFC2761B5A07F400C49C34 /* Utils.swift */; };
+		5CDFC27E1B5A1BE800C49C34 /* ComposeStreamItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDFC27C1B5A1BE800C49C34 /* ComposeStreamItemViewController.swift */; };
+		5CDFC27F1B5A1BE800C49C34 /* ComposeStreamItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CDFC27D1B5A1BE800C49C34 /* ComposeStreamItemViewController.xib */; };
 		5CE3A1D81B5765F70073E984 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CE3A1D41B5765F70073E984 /* OpenSans-Bold.ttf */; };
 		5CE3A1D91B5765F70073E984 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CE3A1D51B5765F70073E984 /* OpenSans-Light.ttf */; };
 		5CE3A1DA1B5765F70073E984 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CE3A1D61B5765F70073E984 /* OpenSans-Regular.ttf */; };
@@ -52,6 +59,13 @@
 		5C91BAEE1B1C227100E202C2 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		5C91BAF11B1C24C600E202C2 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		5CDFC2681B59F70C00C49C34 /* StreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
+		5CDFC2691B59F70C00C49C34 /* StreamViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreamViewController.xib; sourceTree = "<group>"; };
+		5CDFC2721B59FC9300C49C34 /* StreamItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamItemCell.swift; sourceTree = "<group>"; };
+		5CDFC2731B59FC9300C49C34 /* StreamItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreamItemCell.xib; sourceTree = "<group>"; };
+		5CDFC2761B5A07F400C49C34 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5CDFC27C1B5A1BE800C49C34 /* ComposeStreamItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeStreamItemViewController.swift; sourceTree = "<group>"; };
+		5CDFC27D1B5A1BE800C49C34 /* ComposeStreamItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeStreamItemViewController.xib; sourceTree = "<group>"; };
 		5CE3A1D41B5765F70073E984 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		5CE3A1D51B5765F70073E984 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		5CE3A1D61B5765F70073E984 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -114,9 +128,9 @@
 			children = (
 				5CE3A1DF1B578F110073E984 /* Utils */,
 				5CE3A1DC1B5766690073E984 /* Common */,
+				5CDFC26C1B59FBC600C49C34 /* Map */,
+				5CDFC26D1B59FBED00C49C34 /* Stream */,
 				5C448A311B1BFC55001DBE6C /* AppDelegate.swift */,
-				5C91BAED1B1C227100E202C2 /* MapViewController.swift */,
-				5C91BAEE1B1C227100E202C2 /* MapViewController.xib */,
 				5C448A381B1BFC55001DBE6C /* Images.xcassets */,
 				5C448A3A1B1BFC55001DBE6C /* LaunchScreen.xib */,
 				5C448A2F1B1BFC55001DBE6C /* Supporting Files */,
@@ -150,6 +164,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5CDFC26C1B59FBC600C49C34 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				5C91BAED1B1C227100E202C2 /* MapViewController.swift */,
+				5C91BAEE1B1C227100E202C2 /* MapViewController.xib */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		5CDFC26D1B59FBED00C49C34 /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				5CDFC2681B59F70C00C49C34 /* StreamViewController.swift */,
+				5CDFC2691B59F70C00C49C34 /* StreamViewController.xib */,
+				5CDFC2721B59FC9300C49C34 /* StreamItemCell.swift */,
+				5CDFC2731B59FC9300C49C34 /* StreamItemCell.xib */,
+				5CDFC27C1B5A1BE800C49C34 /* ComposeStreamItemViewController.swift */,
+				5CDFC27D1B5A1BE800C49C34 /* ComposeStreamItemViewController.xib */,
+			);
+			name = Stream;
+			sourceTree = "<group>";
+		};
 		5CE3A1D31B5765E00073E984 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +205,7 @@
 				5C0AD09F1B57630F005D667B /* BaseViewController.swift */,
 				5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */,
 				5CE3A1DD1B5766940073E984 /* Styles.swift */,
+				5CDFC2761B5A07F400C49C34 /* Utils.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -275,9 +312,12 @@
 				5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */,
 				5CE3A1D81B5765F70073E984 /* OpenSans-Bold.ttf in Resources */,
 				5CE3A1D91B5765F70073E984 /* OpenSans-Light.ttf in Resources */,
+				5CDFC26B1B59F70C00C49C34 /* StreamViewController.xib in Resources */,
 				5CE3A1DA1B5765F70073E984 /* OpenSans-Regular.ttf in Resources */,
+				5CDFC27F1B5A1BE800C49C34 /* ComposeStreamItemViewController.xib in Resources */,
 				5CE3A1DB1B5765F70073E984 /* OpenSans-Semibold.ttf in Resources */,
 				5C448A391B1BFC55001DBE6C /* Images.xcassets in Resources */,
+				5CDFC2751B59FC9300C49C34 /* StreamItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,11 +368,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CDFC26A1B59F70C00C49C34 /* StreamViewController.swift in Sources */,
 				5C91BAFB1B1C3C2800E202C2 /* ViewUtils.swift in Sources */,
 				5C448A321B1BFC55001DBE6C /* AppDelegate.swift in Sources */,
 				5CE3A1E11B578F1F0073E984 /* QueryUtils.swift in Sources */,
 				5C7BF0751B1C0CA600FEA569 /* Constants.swift in Sources */,
+				5CDFC2771B5A07F400C49C34 /* Utils.swift in Sources */,
 				5CE3A1DE1B5766940073E984 /* Styles.swift in Sources */,
+				5CDFC27E1B5A1BE800C49C34 /* ComposeStreamItemViewController.swift in Sources */,
+				5CDFC2741B59FC9300C49C34 /* StreamItemCell.swift in Sources */,
 				5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */,
 				5C0AD0A01B57630F005D667B /* BaseViewController.swift in Sources */,
 			);

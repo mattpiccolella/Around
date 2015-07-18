@@ -31,7 +31,7 @@ class BaseViewController: UIViewController {
   private func titleView(title: String) -> UIView {
     let label: UILabel = UILabel(frame: CGRectZero)
     label.backgroundColor = UIColor.clearColor()
-    label.font = Styles.Fonts.SemiBold.Medium
+    label.font = Styles.Fonts.Title.SemiBold.Medium
     label.textAlignment = .Center
     label.textColor = UIColor.whiteColor()
     label.text = title
