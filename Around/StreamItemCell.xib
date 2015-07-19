@@ -20,13 +20,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample User" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4I-H0-xc8">
-                        <rect key="frame" x="66" y="95" width="127" height="21"/>
+                        <rect key="frame" x="66" y="95" width="157" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAg-lh-eak">
-                        <rect key="frame" x="205" y="90" width="90" height="30"/>
+                        <rect key="frame" x="235" y="90" width="60" height="30"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="6he-qX-LSg">
                                 <rect key="frame" x="5" y="5" width="20" height="20"/>
@@ -34,8 +34,8 @@
                                     <constraint firstAttribute="width" constant="20" id="ZKw-JC-8iB"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-GL-f0s">
-                                <rect key="frame" x="30" y="5" width="55" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17h" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-GL-f0s">
+                                <rect key="frame" x="25" y="5" width="35" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,13 +45,13 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6he-qX-LSg" secondAttribute="bottom" constant="5" id="DkG-zt-Tsz"/>
                             <constraint firstItem="6he-qX-LSg" firstAttribute="leading" secondItem="dAg-lh-eak" secondAttribute="leading" constant="5" id="Kbz-TA-y9T"/>
-                            <constraint firstAttribute="trailing" secondItem="1tU-GL-f0s" secondAttribute="trailing" constant="5" id="N0F-hs-As1"/>
+                            <constraint firstAttribute="trailing" secondItem="1tU-GL-f0s" secondAttribute="trailing" id="N0F-hs-As1"/>
                             <constraint firstItem="1tU-GL-f0s" firstAttribute="top" secondItem="dAg-lh-eak" secondAttribute="top" constant="5" id="RMN-Cu-fnG"/>
                             <constraint firstItem="6he-qX-LSg" firstAttribute="top" secondItem="dAg-lh-eak" secondAttribute="top" constant="5" id="ayn-kD-MfR"/>
                             <constraint firstAttribute="height" constant="30" id="bnj-iv-OcL"/>
                             <constraint firstAttribute="bottom" secondItem="1tU-GL-f0s" secondAttribute="bottom" constant="5" id="e0f-Gs-oUM"/>
-                            <constraint firstItem="1tU-GL-f0s" firstAttribute="leading" secondItem="6he-qX-LSg" secondAttribute="trailing" constant="5" id="npG-iG-0LP"/>
-                            <constraint firstAttribute="width" constant="90" id="oSx-LN-QP6"/>
+                            <constraint firstItem="1tU-GL-f0s" firstAttribute="leading" secondItem="6he-qX-LSg" secondAttribute="trailing" id="npG-iG-0LP"/>
+                            <constraint firstAttribute="width" constant="60" id="oSx-LN-QP6"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6y-UM-dmB">

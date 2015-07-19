@@ -38,6 +38,7 @@ struct Styles {
         static let fontName = "AvenirNext-Regular"
         static let Medium = UIFont(name: fontName, size: 14.0)
         static let Large = UIFont(name: fontName, size: 16.0)
+        static let XLarge = UIFont(name: fontName, size: 20.0)
       }
     }
   }

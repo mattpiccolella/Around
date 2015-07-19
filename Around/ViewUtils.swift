@@ -11,8 +11,8 @@ import UIKit
 import MapKit
 
 
-func imageNavBarBackground() -> UIImage {
-    let color: UIColor = View.AppColor
+func imageNavBarBackground(color: UIColor) -> UIImage {
+    let color: UIColor = color
     let rect:CGRect = CGRectMake(0,0,1,1)
     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
     color.setFill()

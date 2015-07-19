@@ -14,10 +14,10 @@ class BaseViewController: UIViewController {
   
   let appDelegate: AppDelegate = Global.Delegate
   
-  func formatTopLevelNavBar(title: String, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil) {
+  func formatTopLevelNavBar(title: String, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil, color: UIColor = View.AppColor) {
     self.navigationController?.navigationBar.translucent = true
-    self.navigationController?.navigationBar.setBackgroundImage(imageNavBarBackground(), forBarMetrics: .Default)
-    self.navigationController?.navigationBar.barTintColor = View.AppColor
+    self.navigationController?.navigationBar.setBackgroundImage(imageNavBarBackground(color), forBarMetrics: .Default)
+    self.navigationController?.navigationBar.barTintColor = color
     self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     self.navigationItem.titleView = titleView(title)
     if leftBarButton != nil {

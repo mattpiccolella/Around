@@ -36,10 +36,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTh-CS-6xk">
-                    <rect key="frame" x="16" y="560" width="402" height="40"/>
+                    <rect key="frame" x="16" y="560" width="432" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yi6-9U-xtl">
-                            <rect key="frame" x="36" y="9" width="354" height="21"/>
+                            <rect key="frame" x="36" y="9" width="384" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -63,10 +63,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bE-m8-z4b">
-                    <rect key="frame" x="434" y="560" width="150" height="40"/>
+                    <rect key="frame" x="464" y="560" width="120" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 mi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4q-RW-36e">
-                            <rect key="frame" x="32" y="9" width="118" height="21"/>
+                            <rect key="frame" x="32" y="9" width="88" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                         <constraint firstItem="E4q-RW-36e" firstAttribute="centerY" secondItem="l3W-eK-cH6" secondAttribute="centerY" id="Ekb-2z-5h6"/>
                         <constraint firstAttribute="trailing" secondItem="E4q-RW-36e" secondAttribute="trailing" id="JXS-0w-AoQ"/>
                         <constraint firstItem="l3W-eK-cH6" firstAttribute="leading" secondItem="E4q-RW-36e" secondAttribute="leading" constant="-37" id="KxE-7d-2yM"/>
-                        <constraint firstAttribute="width" constant="150" id="WXr-uv-NvN"/>
+                        <constraint firstAttribute="width" constant="120" id="WXr-uv-NvN"/>
                         <constraint firstItem="E4q-RW-36e" firstAttribute="leading" secondItem="l3W-eK-cH6" secondAttribute="trailing" constant="8" id="ZhL-g1-eXm"/>
                         <constraint firstAttribute="bottom" secondItem="l3W-eK-cH6" secondAttribute="bottom" constant="8" id="f5F-eM-2YS"/>
                         <constraint firstItem="E4q-RW-36e" firstAttribute="leading" secondItem="l3W-eK-cH6" secondAttribute="trailing" constant="22" id="j4G-5N-vEd"/>

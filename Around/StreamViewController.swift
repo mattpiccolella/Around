@@ -23,8 +23,11 @@ class StreamViewController: BaseViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
     setupCollectionView()
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
   }
 
   override func didReceiveMemoryWarning() {
@@ -104,7 +107,8 @@ extension StreamViewController: UICollectionViewDataSource {
 
 extension StreamViewController: UICollectionViewDelegate {
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    // TODO: Show view for item.
+    let streamItemViewController: StreamItemViewController = StreamItemViewController(nibName: "StreamItemViewController", bundle: nil, streamItem: appDelegate.streamItemArray[indexPath.row])
+    self.navigationController?.pushViewController(streamItemViewController, animated: true)
   }
 }
 
