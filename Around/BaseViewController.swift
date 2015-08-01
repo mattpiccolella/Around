@@ -12,6 +12,8 @@ class BaseViewController: UIViewController {
   
   let barButtonHeight: CGFloat = 30.0
   
+  var categoryFilter: CategoryFilterView?
+  
   let appDelegate: AppDelegate = Global.Delegate
   
   func formatTopLevelNavBar(title: String, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil, color: UIColor = View.AppColor) {
@@ -36,13 +38,26 @@ class BaseViewController: UIViewController {
     label.textColor = UIColor.whiteColor()
     label.text = title
     label.sizeToFit()
+    addFilterGestureRecognizer(label)
     return label
   }
   
-  func barButtonImage(image: UIImage) -> UIButton {
+  func addFilterGestureRecognizer(label: UILabel) {
+    let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "filterCategories")
+    label.addGestureRecognizer(tapGestureRecognizer)
+    label.userInteractionEnabled = true
+  }
+  
+  func filterCategories() {
+    // Do nothing here. Let it be overriden as needed.
+  }
+  
+  func barButtonImage(image: UIImage?) -> UIButton {
     let button: UIButton = UIButton.buttonWithType(.Custom) as! UIButton
     button.frame = CGRectMake(0, 0, barButtonHeight, barButtonHeight)
-    button.setImage(image, forState: .Normal)
+    if image != nil {
+      button.setImage(image, forState: .Normal) 
+    }
     return button
   }
   

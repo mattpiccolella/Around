@@ -44,8 +44,11 @@ class StreamItemCell: UICollectionViewCell {
     let expirationDate: NSDate = NSDate(timeIntervalSinceReferenceDate: streamItem["expiredTimestamp"]!.doubleValue!)
     let timeInterval: NSTimeInterval = expirationDate.timeIntervalSinceNow
     timeRemaining.text = stringForRemainingTime((Int) (timeInterval / 60))
-    
-    //userName.text = (streamItem["user"] as? PFObject)["name"] as? String
+    if let picture: PFFile? = PFUser.currentUser()!["profilePicture"] as? PFFile {
+      if let image: UIImage? = UIImage(data: picture!.getData()!) {
+        userPhoto.image = image
+      }
+    }
   }
   
   class func heightForCell(description: String) -> CGFloat {

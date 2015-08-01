@@ -10,15 +10,25 @@ import UIKit
 import MapKit
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-    
+
+  @IBOutlet var grayOverlay: UIView!
+  @IBOutlet var composeButton: UIButton!
   @IBOutlet var mapView: MKMapView!
   
   private var hasLoadedInitialMarkers: Bool = false
   private let annotationReuseIdentifier: String = "customAnnotationId"
   var postSelected: Bool = false
+  var categoryPickerView: CategoryFilterView!
+  var categoryFilterView: CategoryFilterView!
   
+  var markerView: CustomMarkerView?
   var locationManager: CLLocationManager = CLLocationManager()
-
+  
+  let composeButtonBottomPadding: CGFloat = 50.0
+  let composeButtonLeftRightPadding: CGFloat = 40.0
+  let navBarHeight: CGFloat = 64.0
+  
+  var selectedCategories: [StreamItemType] = []
     
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -34,9 +44,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     locationManager.delegate = self
     locationManager.startUpdatingLocation()
     mapView.delegate = self
+    let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "mapViewTapped")
+    mapView.addGestureRecognizer(tapRecognizer)
+    
+    let width: CGFloat = UIScreen.mainScreen().bounds.width
+    let frame: CGRect = CGRectMake(0, 100, width, CategoryFilterView.viewHeight)
+
+    grayOverlay.hidden = true
+    setupCategoryPickerView()
+    setupCategoryFilterView()
   }
   
   override func viewWillAppear(animated: Bool) {
+    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
     if appDelegate.shouldRefreshStreamItems {
       fetchNewStreamItems() {
         self.addMapMarkers()
@@ -55,10 +75,16 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     checkLocationAuthorizationStatus()
   }
   
+  override func filterCategories() {
+    UIView.animateWithDuration(0.5, animations: addCategoryFilterView)
+  }
+  
   func addMapMarkers() {
+    mapView.removeAnnotations(mapView.annotations)
     for item in appDelegate.streamItemArray {
       let marker: MKPointAnnotation = MKPointAnnotation()
       marker.coordinate = CLLocationCoordinate2DMake(item["latitude"]!.doubleValue, item["longitude"]!.doubleValue)
+      marker.title = item.objectId
       mapView.addAnnotation(marker)
     }
   }
@@ -73,7 +99,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
       addMapMarkers()
     }
   }
-
   
   // MARK: Location services.
   func checkLocationAuthorizationStatus() {
@@ -83,7 +108,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
       locationManager.requestWhenInUseAuthorization()
     }
   }
-  // MARK: Navigation bar setup.
 
   override func leftButtonPushed() {
     self.navigationController?.setViewControllers([appDelegate.streamViewController], animated: false)
@@ -97,18 +121,30 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
 
   func rightButtonPushed() {
-    // TODO: Go to profile.
+    let userSettings: UserSettingsViewController = UserSettingsViewController(nibName: "UserSettingsViewController", bundle: nil)
+    navigationController?.pushViewController(userSettings, animated: true)
   }
   
   func rightBarButtonItem() -> UIBarButtonItem {
     // TODO: Make this a real profile image.
     let profileImage: UIImage = UIImage(named: "Profile")!
-    let button: UIButton = barButtonImage(profileImage)
+    let button: UIButton = barButtonImage(nil)
+    if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
+      if let image: UIImage? = UIImage(data: picture.getData()!) {
+        button.setImage(image, forState: .Normal)
+        button.setImage(image, forState: .Selected)
+      }
+    }
     button.layer.cornerRadius = barButtonHeight / 2.0
     button.layer.masksToBounds = true
     button.addTarget(self, action: "rightButtonPushed", forControlEvents: .TouchUpInside)
     let rightBarButton: UIBarButtonItem = UIBarButtonItem(customView: button)
     return rightBarButton
+  }
+  
+  func mapViewTapped() {
+    markerView?.removeFromSuperview()
+    markerView = nil
   }
 
   @IBAction func currentLocationButtonPressed(sender: AnyObject) {
@@ -118,8 +154,64 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
 
   @IBAction func composeButtonPressed(sender: AnyObject) {
-    let composeView: ComposeStreamItemViewController = ComposeStreamItemViewController(nibName: "ComposeStreamItemViewController", bundle: nil)
-    navigationController?.pushViewController(composeView, animated: true)
+    if grayOverlay.hidden {
+      UIView.animateWithDuration(0.5, animations: addCategoryPickerView)
+    } else {
+      UIView.animateWithDuration(0.5, animations: hideCategoryPickerView)
+    }
+  }
+  
+  func findStreamItemById(objectId: String) -> PFObject? {
+    for streamItem in appDelegate.streamItemArray {
+      if streamItem.objectId == objectId {
+        return streamItem
+      }
+    }
+    return nil
+  }
+  
+  func setupCategoryPickerView() {
+    let frame: CGRect = CGRectMake(composeButtonLeftRightPadding / 2.0, composeButton.frame.origin.y - composeButtonBottomPadding - CategoryFilterView.viewHeight + CategoryFilterView.doneButtonHeight, UIScreen.mainScreen().bounds.width - composeButtonLeftRightPadding, CategoryFilterView.viewHeight)
+    categoryPickerView = CategoryFilterView(frame: frame)
+    categoryPickerView.setupCategoryCells(self)
+    categoryPickerView.doneButton.hidden = true
+  }
+  
+  func addCategoryPickerView() {
+    grayOverlay.hidden = false
+    categoryFilterView.removeFromSuperview()
+    view.addSubview(self.categoryPickerView)
+    composeButton.setImage(UIImage(named: "XButton"), forState: .Normal)
+    composeButton.setImage(UIImage(named: "XButton"), forState: .Selected)
+  }
+  
+  func hideCategoryPickerView() {
+    self.grayOverlay.hidden = true
+    self.categoryPickerView.removeFromSuperview()
+    composeButton.setImage(UIImage(named: "Pinpoint"), forState: .Normal)
+    composeButton.setImage(UIImage(named: "Pinpoint"), forState: .Selected)
+  }
+  
+  func setupCategoryFilterView() {
+    let frame: CGRect = CGRectMake(composeButtonLeftRightPadding / 2.0, navBarHeight, UIScreen.mainScreen().bounds.width - composeButtonLeftRightPadding, CategoryFilterView.viewHeight)
+    categoryFilterView = CategoryFilterView(frame: frame)
+    categoryFilterView.setupCategoryCells(self)
+    categoryFilterView.setupDoneButton(doneButtonPressed)
+  }
+  
+  func addCategoryFilterView() {
+    grayOverlay.hidden = false
+    categoryPickerView.removeFromSuperview()
+    view.addSubview(categoryFilterView)
+  }
+  
+  func hideCategoryFilterView() {
+    grayOverlay.hidden = true
+    categoryFilterView.removeFromSuperview()
+  }
+  
+  func doneButtonPressed() {
+    hideCategoryFilterView()
   }
 }
 
@@ -154,7 +246,7 @@ extension MapViewController: MKMapViewDelegate {
         return pinView
       } else {
         let newPinView: MKAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
-        newPinView.canShowCallout = true
+        newPinView.canShowCallout = false
         newPinView.image = UIImage(named: "Marker")
         return newPinView
       }
@@ -164,10 +256,43 @@ extension MapViewController: MKMapViewDelegate {
   }
   
   func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-    // TODO: Make the view appear.
+    println("Coordinate: \(mapView.centerCoordinate.latitude)")
+    mapView.setCenterCoordinate(view.annotation.coordinate, animated: true)
+    println("Coordinate: \(mapView.centerCoordinate.latitude)")
+    let point: CGPoint = mapView.convertCoordinate(view.annotation.coordinate, toPointToView: mapView)
+    markerView?.removeFromSuperview()
+    if !view.annotation.isKindOfClass(MKUserLocation.self) {
+      if let streamItem: PFObject? = findStreamItemById(view.annotation.title!) {
+        let calloutHeight: CGFloat = CustomMarkerView.heightForView(streamItem!)
+        let calloutFrame: CGRect = CGRectMake(20.0, view.frame.origin.y - (view.frame.size.height), self.view.frame.size.width - 40.0, calloutHeight)
+        markerView = CustomMarkerView(frame: calloutFrame)
+        markerView!.setupView(streamItem!, location: appDelegate.location)
+        markerView!.delegate = self
+        mapView.addSubview(markerView!)
+      }
+    }
   }
   
   func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
     // TODO: Make the view disappear.
+  }
+}
+
+extension MapViewController: CustomMarkerViewDelegate {
+  func showInfoView(streamItem: PFObject) {
+    let streamItemViewController: StreamItemViewController = StreamItemViewController(nibName: "StreamItemViewController", bundle: nil, streamItem: streamItem)
+    self.navigationController?.pushViewController(streamItemViewController, animated: true)
+  }
+}
+
+extension MapViewController: CategoryCellActionDelegate {
+  func categorySelected(type: StreamItemType) {
+    // Distinguish between between category view is present.
+    if let view = categoryPickerView.superview {
+      let composeView: ComposeStreamItemViewController = ComposeStreamItemViewController(nibName: "ComposeStreamItemViewController", bundle: nil, type: type)
+      navigationController?.pushViewController(composeView, animated: true)
+    } else {
+      selectedCategories.append(type)
+    }
   }
 }

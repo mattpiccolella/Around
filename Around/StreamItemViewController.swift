@@ -9,10 +9,11 @@
 import UIKit
 import MapKit
 
+let metersToMiles: Double = 0.000621371
+
 class StreamItemViewController: BaseViewController {
   
   let imageHeight: CGFloat = 40.0
-  let metersToMiles: Double = 0.000621371
   var streamItem: PFObject!
   var postCoordinate: CLLocationCoordinate2D!
 
@@ -113,6 +114,11 @@ class StreamItemViewController: BaseViewController {
       if let image: UIImage? = UIImage(data: picture!.getData()!) {
         postPhoto.image = image
         postPhoto.contentMode = UIViewContentMode.ScaleAspectFit
+      }
+    }
+    if let picture: PFFile? = PFUser.currentUser()!["profilePicture"] as? PFFile {
+      if let image: UIImage? = UIImage(data: picture!.getData()!) {
+        userPhoto.image = image
       }
     }
     setDate(streamItem["postedTimestamp"] as! Double)

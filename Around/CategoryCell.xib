@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoryCell" customModule="Around" customModuleProvider="target">
+            <connections>
+                <outlet property="typeButton" destination="qcY-bl-Pwf" id="FQy-wl-1xk"/>
+                <outlet property="typeLabel" destination="3CN-rZ-PdK" id="wEU-XD-60J"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="294" height="90"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcY-bl-Pwf">
+                    <rect key="frame" x="122" y="10" width="50" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="SCv-uI-t7H"/>
+                        <constraint firstAttribute="width" constant="50" id="luG-bg-HPA"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="categoryButtonPressed:" destination="-1" eventType="touchUpInside" id="at1-iA-JEw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CN-rZ-PdK">
+                    <rect key="frame" x="124" y="76" width="46" height="14"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="contentEdgeInsets" minX="0.0" minY="-2" maxX="0.0" maxY="-2"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="qcY-bl-Pwf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="0tP-Md-kcx"/>
+                <constraint firstItem="3CN-rZ-PdK" firstAttribute="centerX" secondItem="qcY-bl-Pwf" secondAttribute="centerX" id="Odb-22-kmz"/>
+                <constraint firstAttribute="trailing" secondItem="qcY-bl-Pwf" secondAttribute="trailing" constant="10" id="YF0-4B-1sz"/>
+                <constraint firstAttribute="centerX" secondItem="qcY-bl-Pwf" secondAttribute="centerX" id="b05-jq-gBO"/>
+                <constraint firstAttribute="bottom" secondItem="3CN-rZ-PdK" secondAttribute="bottom" id="lfN-S0-9G1"/>
+                <constraint firstItem="qcY-bl-Pwf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="vqo-4i-ZHg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="0tP-Md-kcx"/>
+                    <exclude reference="YF0-4B-1sz"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="276" y="18"/>
+        </view>
+    </objects>
+</document>

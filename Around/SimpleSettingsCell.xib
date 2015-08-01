@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SimpleSettingsCell" customModule="Around" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="41"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="41"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9An-ej-et3">
+                        <rect key="frame" x="8" y="0.0" width="25" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="DQO-b4-TbG"/>
+                            <constraint firstAttribute="width" secondItem="9An-ej-et3" secondAttribute="height" multiplier="1:1" id="Jys-CD-WpL"/>
+                            <constraint firstAttribute="width" constant="25" id="TiE-rS-OYk"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="DQO-b4-TbG"/>
+                                <exclude reference="Jys-CD-WpL"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8o-90-EAC">
+                        <rect key="frame" x="49" y="6" width="316" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sgj-gG-iVp">
+                        <rect key="frame" x="8" y="40" width="365" height="1"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="nQu-Dd-pPq"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9An-ej-et3" secondAttribute="trailing" constant="336" id="MbO-jr-rMs"/>
+                <constraint firstAttribute="bottom" secondItem="sgj-gG-iVp" secondAttribute="bottom" id="Qtf-pY-g7C"/>
+                <constraint firstAttribute="trailing" secondItem="b8o-90-EAC" secondAttribute="trailing" constant="8" id="XDP-xm-3Up"/>
+                <constraint firstItem="sgj-gG-iVp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Xiy-1F-pzQ"/>
+                <constraint firstAttribute="bottom" secondItem="9An-ej-et3" secondAttribute="bottom" constant="8" id="Z2Q-EW-37W"/>
+                <constraint firstItem="9An-ej-et3" firstAttribute="leading" secondItem="sgj-gG-iVp" secondAttribute="leading" id="brB-CC-ZAc"/>
+                <constraint firstItem="b8o-90-EAC" firstAttribute="leading" secondItem="9An-ej-et3" secondAttribute="trailing" constant="16" id="fpJ-uO-Kt6"/>
+                <constraint firstAttribute="centerY" secondItem="b8o-90-EAC" secondAttribute="centerY" id="hAG-mH-SLV"/>
+                <constraint firstItem="9An-ej-et3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kHz-GG-jy8"/>
+                <constraint firstAttribute="trailing" secondItem="sgj-gG-iVp" secondAttribute="trailing" id="o2I-VY-3LX"/>
+                <constraint firstItem="9An-ej-et3" firstAttribute="centerY" secondItem="b8o-90-EAC" secondAttribute="centerY" id="tfh-Xt-9pl"/>
+                <constraint firstItem="9An-ej-et3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="yVI-4n-dvh"/>
+            </constraints>
+            <size key="customSize" width="373" height="50"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="MbO-jr-rMs"/>
+                    <exclude reference="brB-CC-ZAc"/>
+                    <exclude reference="hAG-mH-SLV"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="cellLabel" destination="b8o-90-EAC" id="HYd-ir-PH9"/>
+                <outlet property="cellLogo" destination="9An-ej-et3" id="ejC-QI-WIl"/>
+                <outlet property="imageDimenConstraint" destination="TiE-rS-OYk" id="Ijm-8C-QNQ"/>
+                <outlet property="imageLabelPadding" destination="fpJ-uO-Kt6" id="9Hf-5m-jXa"/>
+                <outlet property="separatorLeftPadding" destination="Xiy-1F-pzQ" id="kT5-aU-4N0"/>
+            </connections>
+            <point key="canvasLocation" x="247.5" y="301"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // Application-wide information
   var searchRadius: Double = 0.0
   var streamItemArray: Array<PFObject> = []
-  var currentUser: PFObject?
+  var currentUser: PFUser?
   var location: CLLocation?
   var shouldRefreshStreamItems: Bool = false
   var minPoint: CLLocationCoordinate2D?
@@ -38,16 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     let rootViewController: UIViewController
     // MARK: Check for login credentials
-    if (self.hasUserCredentials()) {
-      var query: PFQuery = PFQuery(className: ParseInfo.user)
-      query.getObjectInBackgroundWithId(self.currentUserId()! as String, block: {
-        (object:PFObject?, error: NSError?) -> Void in
-        self.currentUser = object
-      })
+    if (self.isLoggedIn()) {
       rootViewController = loggedInView()
     } else {
       // TODO: Switch this.
-      rootViewController = loggedInView()
+      rootViewController = loggedOutView()
     }
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
     if let window = window {
@@ -64,16 +59,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
     
   func loggedOutView() -> UIViewController {
-    // TODO: Add logged out view controller.
-    return UIViewController()
+    let signupViewController: SignupViewController = SignupViewController(nibName: "SignupViewController", bundle: nil)
+    return signupViewController
   }
     
-  func hasUserCredentials() -> Bool {
-    return (currentUserId() != nil)
-  }
-    
-  func currentUserId() -> NSString? {
-    return (NSUserDefaults.standardUserDefaults().objectForKey(ParseInfo.userId)) as? NSString
+  func isLoggedIn() -> Bool {
+    if let currentUser = PFUser.currentUser() {
+      self.currentUser = currentUser
+      return true
+    } else {
+      return false
+    }
   }
 }
 

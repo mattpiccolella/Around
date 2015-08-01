@@ -64,9 +64,13 @@ class StreamViewController: BaseViewController {
   }
   
   func rightBarButtonItem() -> UIBarButtonItem {
-    // TODO: Make this a real profile image.
-    let profileImage: UIImage = UIImage(named: "Profile")!
-    let button: UIButton = barButtonImage(profileImage)
+    let button: UIButton = barButtonImage(nil)
+    if let picture: PFFile? = PFUser.currentUser()!["profilePicture"] as? PFFile {
+      if let image: UIImage? = UIImage(data: picture!.getData()!) {
+        button.setImage(image, forState: .Normal)
+        button.setImage(image, forState: .Selected)
+      }
+    }
     button.layer.cornerRadius = barButtonHeight / 2.0
     button.layer.masksToBounds = true
     button.addTarget(self, action: "rightButtonPushed", forControlEvents: .TouchUpInside)
@@ -79,7 +83,8 @@ class StreamViewController: BaseViewController {
   }
   
   func rightButtonPushed() {
-    // TODO: Show login view controller.
+    let userSettings: UserSettingsViewController = UserSettingsViewController(nibName: "UserSettingsViewController", bundle: nil)
+    navigationController?.pushViewController(userSettings, animated: true)
   }
   
   func refreshStreamItems() {

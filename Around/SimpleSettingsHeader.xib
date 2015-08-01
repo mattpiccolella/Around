@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="SimpleSettingsHeader" customModule="Around" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AV2-RC-NH2">
+                    <rect key="frame" x="8" y="16" width="304" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="1nc-Gt-7aP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYu-oS-8Wu">
+                    <rect key="frame" x="0.0" y="55" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="6KU-SX-jcP"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="bYu-oS-8Wu" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="5xc-9K-TKv"/>
+                <constraint firstItem="AV2-RC-NH2" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="16" id="Ve9-9G-fJ4"/>
+                <constraint firstAttribute="bottom" secondItem="bYu-oS-8Wu" secondAttribute="bottom" id="VnF-D7-9L5"/>
+                <constraint firstAttribute="trailing" secondItem="AV2-RC-NH2" secondAttribute="trailing" constant="8" id="ew0-LI-QWc"/>
+                <constraint firstItem="AV2-RC-NH2" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="8" id="l8R-2A-zcm"/>
+                <constraint firstAttribute="bottom" secondItem="AV2-RC-NH2" secondAttribute="bottom" constant="16" id="qoh-OW-dbp"/>
+                <constraint firstAttribute="trailing" secondItem="bYu-oS-8Wu" secondAttribute="trailing" id="tet-Ae-2Uu"/>
+            </constraints>
+            <connections>
+                <outlet property="headerLabel" destination="AV2-RC-NH2" id="xq7-ve-eLh"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+</document>

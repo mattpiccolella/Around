@@ -29,6 +29,7 @@ struct Styles {
       
       struct Bold {
         static let fontName = "OpenSans-Bold"
+        static let XSmall = UIFont(name: fontName, size: 14.0)
         static let Medium = UIFont(name: fontName, size: 20.0)
       }
     }
@@ -36,9 +37,15 @@ struct Styles {
     struct Body {
       struct Normal {
         static let fontName = "AvenirNext-Regular"
+        static let Small = UIFont(name: fontName, size: 12.0)
         static let Medium = UIFont(name: fontName, size: 14.0)
         static let Large = UIFont(name: fontName, size: 16.0)
         static let XLarge = UIFont(name: fontName, size: 20.0)
+      }
+      struct Medium {
+        static let fontName = "AvenirNext-Medium"
+        static let Medium = UIFont(name: fontName, size: 14.0)
+        static let Large = UIFont(name: fontName, size: 16.0)
       }
     }
   }

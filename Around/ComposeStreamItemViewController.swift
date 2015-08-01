@@ -9,6 +9,15 @@
 import UIKit
 import MapKit
 
+enum StreamItemType: String {
+  case Food = "Food"
+  case Shopping = "Shopping"
+  case Academic = "Academic"
+  case Entertainment = "Entertainment"
+  case Social = "Social"
+  case Other = "Other"
+}
+
 class ComposeStreamItemViewController: BaseViewController, UINavigationControllerDelegate {
   
   @IBOutlet var mapView: MKMapView!
@@ -26,6 +35,8 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
   var isPickingTime: Bool = false
   var timeSelected: NSTimeInterval = 0.0
   var postLocation: CLLocationCoordinate2D!
+  
+  var type: StreamItemType!
 
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -33,6 +44,11 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
+  
+  convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, type: StreamItemType) {
+    self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    self.type = type
   }
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -99,6 +115,8 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
     streamItem.setObject(postLocation.latitude, forKey: "latitude")
     streamItem.setObject(postLocation.longitude, forKey: "longitude")
     streamItem.setObject(postPhoto!, forKey: "postPicture")
+    streamItem.setObject(PFUser.currentUser()!, forKey: "user")
+    streamItem.setObject(type.rawValue, forKey: "type")
     streamItem.saveInBackgroundWithBlock { (succeeded, error) -> Void in
       if succeeded {
         println("Woohoo!")
