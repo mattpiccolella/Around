@@ -95,7 +95,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   
   func addMapMarkers() {
     mapView.removeAnnotations(mapView.annotations)
-    for item in appDelegate.streamItemArray {
+    for item in appDelegate.selectedStreamItems {
       let marker: MKPointAnnotation = MKPointAnnotation()
       marker.coordinate = CLLocationCoordinate2DMake(item["latitude"]!.doubleValue, item["longitude"]!.doubleValue)
       marker.title = item.objectId
@@ -105,7 +105,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   
   func loadInitialStreamItems() {
     // Bad hack. We try to load only based off of whether there are any objects available.
-    if count(appDelegate.streamItemArray) == 0 {
+    if count(appDelegate.selectedStreamItems) == 0 {
       fetchNewStreamItems() {
         self.addMapMarkers()
       }
@@ -185,7 +185,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func findStreamItemById(objectId: String) -> PFObject? {
-    for streamItem in appDelegate.streamItemArray {
+    for streamItem in appDelegate.selectedStreamItems {
       if streamItem.objectId == objectId {
         return streamItem
       }
@@ -201,6 +201,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func addCategoryPickerView() {
+    markerView?.removeFromSuperview()
+    markerView = nil
     grayOverlay.hidden = false
     categoryFilterView.removeFromSuperview()
     view.addSubview(self.categoryPickerView)
@@ -224,7 +226,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func addCategoryFilterView() {
+    markerView?.removeFromSuperview()
+    markerView = nil
     grayOverlay.hidden = false
+    categoryFilterView.selectedCategories = appDelegate.selectedCategories
+    categoryFilterView.setupCategoryCells(self)
     categoryPickerView.removeFromSuperview()
     view.addSubview(categoryFilterView)
   }
@@ -333,6 +339,8 @@ extension MapViewController: CategoryCellActionDelegate {
         appDelegate.selectedCategories.removeAtIndex(find(appDelegate.selectedCategories, type)!)
       }
     }
+    filterStreamItems()
+    addMapMarkers()
   }
 }
 

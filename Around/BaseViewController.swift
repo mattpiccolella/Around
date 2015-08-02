@@ -79,8 +79,24 @@ class BaseViewController: UIViewController {
     let query: PFQuery = getStreamItems(appDelegate.minPoint!, appDelegate.maxPoint!)
     query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
       self.appDelegate.streamItemArray = results as! Array<PFObject>
+      self.filterStreamItems()
       completion?()
       return
+    }
+  }
+  
+  func filterStreamItems() {
+    appDelegate.selectedStreamItems = []
+    if count(appDelegate.selectedCategories) == 0 {
+      appDelegate.selectedStreamItems = appDelegate.streamItemArray
+    } else {
+      for item in appDelegate.streamItemArray {
+        if let type: StreamItemType = StreamItemType(rawValue: item["type"] as! String) {
+          if let index: Int = find(appDelegate.selectedCategories, type) {
+            appDelegate.selectedStreamItems.append(item)
+          }
+        }
+      }
     }
   }
 }

@@ -28,6 +28,8 @@ class StreamViewController: BaseViewController {
   
   override func viewWillAppear(animated: Bool) {
     formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
+    
+    collectionView.reloadData()
   }
 
   override func didReceiveMemoryWarning() {
@@ -102,12 +104,12 @@ extension StreamViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let streamItemCell: StreamItemCell = collectionView.dequeueReusableCellWithReuseIdentifier(StreamItemCell.reuseIdentifier, forIndexPath: indexPath) as! StreamItemCell
     streamItemCell.setup()
-    streamItemCell.inflate(appDelegate.streamItemArray[indexPath.row])
+    streamItemCell.inflate(appDelegate.selectedStreamItems[indexPath.row])
     return streamItemCell
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return appDelegate.streamItemArray.count
+    return appDelegate.selectedStreamItems.count
   }
   
   
@@ -115,14 +117,14 @@ extension StreamViewController: UICollectionViewDataSource {
 
 extension StreamViewController: UICollectionViewDelegate {
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    let streamItemViewController: StreamItemViewController = StreamItemViewController(nibName: "StreamItemViewController", bundle: nil, streamItem: appDelegate.streamItemArray[indexPath.row])
+    let streamItemViewController: StreamItemViewController = StreamItemViewController(nibName: "StreamItemViewController", bundle: nil, streamItem: appDelegate.selectedStreamItems[indexPath.row])
     self.navigationController?.pushViewController(streamItemViewController, animated: true)
   }
 }
 
 extension StreamViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    let cellHeight: CGFloat = StreamItemCell.heightForCell(appDelegate.streamItemArray[indexPath.row]["description"] as! String)
+    let cellHeight: CGFloat = StreamItemCell.heightForCell(appDelegate.selectedStreamItems[indexPath.row]["description"] as! String)
     return CGSizeMake(self.view.frame.size.width, cellHeight)
   }
 }

@@ -49,7 +49,7 @@ class CategoryCell: UIView {
     setupNibSubview()
   }
   
-  func setupCell(type: StreamItemType) {
+  func setupCell(type: StreamItemType, selected: Bool) {
     self.type = type
     view.backgroundColor = UIColor.clearColor()
     typeLabel.setTitle(type.rawValue, forState: .Normal)
@@ -61,10 +61,11 @@ class CategoryCell: UIView {
     typeButton.layer.cornerRadius = typeButton.frame.width / 2.0
     typeButton.layer.borderColor = View.AppColor.CGColor
     typeButton.layer.borderWidth = 1.0
-    setupButton(type, selected: false)
+    setupButton(type, selected: selected)
   }
   
   func setupButton(type: StreamItemType, selected: Bool) {
+    self.selected = selected
     typeButton.setImage(UIImage(named: getImageName(type, selected:selected)), forState: .Normal)
     typeButton.setImage(UIImage(named: getImageName(type, selected: selected)), forState: .Selected)
     typeButton.backgroundColor = selected ? View.AppColor : UIColor.whiteColor()

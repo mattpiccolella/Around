@@ -27,6 +27,8 @@ class CategoryFilterView: UIView {
   let categoryNames: [StreamItemType] = [.Food, .Shopping, .Academic, .Entertainment, .Social, .Other]
   var shouldUpdateCells: Bool = false
   
+  var selectedCategories: [StreamItemType] = []
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupNibSubview()
@@ -52,7 +54,7 @@ class CategoryFilterView: UIView {
   func setupCategoryCells(delegate: CategoryCellActionDelegate) {
     let categories: [CategoryCell] = [categoryOne, categoryTwo, categoryThree, categoryFour, categoryFive, categorySix]
     for i in 0...count(categories)-1 {
-      categories[i].setupCell(categoryNames[i])
+      categories[i].setupCell(categoryNames[i], selected: find(selectedCategories, categoryNames[i]) != nil)
       categories[i].shouldUpdate = shouldUpdateCells
       categories[i].delegate = delegate
     }
