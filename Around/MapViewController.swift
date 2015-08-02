@@ -28,8 +28,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   let composeButtonBottomPadding: CGFloat = 50.0
   let composeButtonLeftRightPadding: CGFloat = 40.0
   let navBarHeight: CGFloat = 64.0
-  
-  var selectedCategories: [StreamItemType] = []
     
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -57,6 +55,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     let frame: CGRect = CGRectMake(0, 100, width, CategoryFilterView.viewHeight)
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("refreshMarkers"), name: streamItemAdded, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("addCategoryFilterView"), name: SelectedCategoryView.tappedNotification, object: nil)
 
     grayOverlay.hidden = true
     setupCategoryPickerView()
@@ -77,8 +76,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
       postSelected = false
     }
     grayOverlay.hidden = true
-    categoryPickerView.removeFromSuperview()
-    categoryFilterView.removeFromSuperview()
+    hideCategoryFilterView()
+    hideCategoryPickerView()
     // TODO: Look into consistency and other things.
   }
   
@@ -233,8 +232,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   func hideCategoryFilterView() {
     grayOverlay.hidden = true
     categoryFilterView.removeFromSuperview()
-    selectedCategoryView.hidden = count(selectedCategories) == 0
-    selectedCategoryView.categories = selectedCategories
+    selectedCategoryView.hidden = count(appDelegate.selectedCategories) == 0
+    selectedCategoryView.categories = appDelegate.selectedCategories
     selectedCategoryView.collectionView.reloadData()
   }
   
@@ -275,7 +274,12 @@ extension MapViewController: MKMapViewDelegate {
       } else {
         let newPinView: CustomAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
         newPinView.canShowCallout = false
-        newPinView.image = UIImage(named: "Marker")
+        if let streamItemId: String = annotation.title {
+          if let streamItem: PFObject = findStreamItemById(streamItemId) {
+            let streamItemType: String = streamItem["type"] as! String
+            newPinView.image = UIImage(named: "\(streamItemType)-Marker")
+          }
+        }
         return newPinView
       }
     } else {
@@ -287,24 +291,17 @@ extension MapViewController: MKMapViewDelegate {
     mapView.setCenterCoordinate(view.annotation.coordinate, animated: true)
     markerView?.removeFromSuperview()
     if !view.annotation.isKindOfClass(MKUserLocation.self) {
-      if let streamItem: PFObject? = findStreamItemById(view.annotation.title!) {
-        let calloutHeight: CGFloat = CustomMarkerView.heightForView(streamItem!)
+      if let streamItem: PFObject = findStreamItemById(view.annotation.title!) {
+        let calloutHeight: CGFloat = CustomMarkerView.heightForView(streamItem)
         let calloutWidth: CGFloat = self.view.frame.size.width - 40.0
         let calloutX: CGFloat = -calloutWidth / 2.0 + view.frame.size.width / 2.0
         let calloutY: CGFloat = -calloutHeight - 10.0
         let calloutFrame: CGRect = CGRectMake(calloutX, calloutY, calloutWidth, calloutHeight)
         markerView = CustomMarkerView(frame: calloutFrame)
-        markerView!.setupView(streamItem!, location: appDelegate.location)
+        markerView!.setupView(streamItem, location: appDelegate.location)
         markerView!.delegate = self
         view.addSubview(markerView!)
       }
-    }
-  }
-  
-  func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
-    if !postSelected {
-      markerView?.removeFromSuperview()
-      markerView = nil
     }
   }
   
@@ -331,9 +328,9 @@ extension MapViewController: CategoryCellActionDelegate {
       navigationController?.pushViewController(composeView, animated: true)
     } else {
       if added {
-        selectedCategories.append(type)
+        appDelegate.selectedCategories.append(type)
       } else {
-        selectedCategories.removeAtIndex(find(selectedCategories, type)!)
+        appDelegate.selectedCategories.removeAtIndex(find(appDelegate.selectedCategories, type)!)
       }
     }
   }

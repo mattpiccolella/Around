@@ -10,6 +10,8 @@ import UIKit
 
 class SelectedCategoryView: UIView {
   
+  static let tappedNotification = "selectedCategoryViewTapped"
+  
   var view: UIView!
 
   var categories: [StreamItemType]
@@ -42,6 +44,9 @@ class SelectedCategoryView: UIView {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.registerNib(UINib(nibName: "SelectedCategoryCell", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: SelectedCategoryCell.reuseIdentifier)
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("selectedCategoryViewTapped")))
+    // TODO: This is temporary. Do this for now, because we want filter button to be included in above tap gesture.
+    filterButton.enabled = false
   }
   
   func loadViewFromNib() -> UIView {
@@ -49,6 +54,10 @@ class SelectedCategoryView: UIView {
     let nib = UINib(nibName: "SelectedCategoryView", bundle: bundle)
     let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
     return view
+  }
+  
+  func selectedCategoryViewTapped() {
+    NSNotificationCenter.defaultCenter().postNotificationName(SelectedCategoryView.tappedNotification, object: nil)
   }
 }
 

@@ -22,6 +22,8 @@ let streamItemAdded = "streamItemAdded"
 
 class ComposeStreamItemViewController: BaseViewController, UINavigationControllerDelegate {
   
+  private let annotationReuseIdentifier: String = "customAnnotationId"
+  
   @IBOutlet var mapView: MKMapView!
   @IBOutlet var textView: UITextView!
   @IBOutlet var bottomConstraint: NSLayoutConstraint!
@@ -98,6 +100,7 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
     mapView.addAnnotation(marker)
     mapView.showsUserLocation = true
     mapView.userInteractionEnabled = false
+    mapView.delegate = self
   }
   
   func rightBarButtonItem() -> UIBarButtonItem {
@@ -235,3 +238,23 @@ extension ComposeStreamItemViewController: UIImagePickerControllerDelegate {
     navigationItem.rightBarButtonItem?.enabled = count(textView.text) > 0 && photoSelected
   }
 }
+
+extension ComposeStreamItemViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    if !annotation.isKindOfClass(MKUserLocation.self) {
+      if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
+        pinView.annotation = annotation
+        return pinView
+      } else {
+        let newPinView: CustomAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
+        newPinView.canShowCallout = false
+        newPinView.image = UIImage(named: "\(type.rawValue)-Marker")
+        return newPinView
+      }
+    } else {
+      return nil
+    }
+  }
+}
+
+

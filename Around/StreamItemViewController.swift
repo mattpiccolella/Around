@@ -13,6 +13,8 @@ let metersToMiles: Double = 0.000621371
 
 class StreamItemViewController: BaseViewController {
   
+  private let annotationReuseIdentifier: String = "customAnnotationId"
+  
   let imageHeight: CGFloat = 40.0
   var streamItem: PFObject!
   var postCoordinate: CLLocationCoordinate2D!
@@ -89,6 +91,7 @@ class StreamItemViewController: BaseViewController {
     userPhoto.layer.cornerRadius = imageHeight / 2.0
     userPhoto.layer.masksToBounds = true
     mapView.userInteractionEnabled = false
+    mapView.delegate = self
   }
   
   func setupButtons() {
@@ -165,4 +168,23 @@ class StreamItemViewController: BaseViewController {
     // TODO: Actually report this post.
   }
 
+}
+
+extension StreamItemViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    if !annotation.isKindOfClass(MKUserLocation.self) {
+      if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
+        pinView.annotation = annotation
+        return pinView
+      } else {
+        let newPinView: CustomAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
+        newPinView.canShowCallout = false
+        let streamItemType: String = streamItem["type"] as! String
+        newPinView.image = UIImage(named: "\(streamItemType)-Marker")
+        return newPinView
+      }
+    } else {
+      return nil
+    }
+  }
 }

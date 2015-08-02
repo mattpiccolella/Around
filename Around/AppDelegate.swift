@@ -15,12 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
   // Application-wide information
   var searchRadius: Double = 0.0
-  var streamItemArray: Array<PFObject> = []
   var currentUser: PFUser?
   var location: CLLocation?
   var shouldRefreshStreamItems: Bool = false
   var minPoint: CLLocationCoordinate2D?
   var maxPoint: CLLocationCoordinate2D?
+  
+  
+  var streamItemArray: Array<PFObject> = []
+  var selectedCategories: [StreamItemType] = []
+  var selectedStreamItems: Array<PFObject> = []
   
   var mapViewController: MapViewController!
   var streamViewController: StreamViewController!
