@@ -15,7 +15,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   @IBOutlet var composeButton: UIButton!
   @IBOutlet var mapView: MKMapView!
   @IBOutlet var selectedCategoryView: SelectedCategoryView!
-  
+
   private var hasLoadedInitialMarkers: Bool = false
   private let annotationReuseIdentifier: String = "customAnnotationId"
   var postSelected: Bool = false
@@ -74,7 +74,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     } else if !postSelected {
       addMapMarkers()
     } else {
-      postSelected = false;
+      postSelected = false
     }
     grayOverlay.hidden = true
     categoryPickerView.removeFromSuperview()
@@ -219,6 +219,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   func setupCategoryFilterView() {
     let frame: CGRect = CGRectMake(composeButtonLeftRightPadding / 2.0, navBarHeight, UIScreen.mainScreen().bounds.width - composeButtonLeftRightPadding, CategoryFilterView.viewHeight)
     categoryFilterView = CategoryFilterView(frame: frame)
+    categoryFilterView.shouldUpdateCells = true
     categoryFilterView.setupCategoryCells(self)
     categoryFilterView.setupDoneButton(doneButtonPressed)
   }
@@ -301,32 +302,46 @@ extension MapViewController: MKMapViewDelegate {
   }
   
   func mapView(mapView: MKMapView!, didDeselectAnnotationView view: MKAnnotationView!) {
-    // TODO: Make the view disappear.
+    if !postSelected {
+      markerView?.removeFromSuperview()
+      markerView = nil
+    }
+  }
+  
+  func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+    if let annotationView: MKAnnotationView = mapView.viewForAnnotation(userLocation) {
+      annotationView.canShowCallout = false
+    }
   }
 }
 
 extension MapViewController: CustomMarkerViewDelegate {
   func showInfoView(streamItem: PFObject) {
+    postSelected = true
     let streamItemViewController: StreamItemViewController = StreamItemViewController(nibName: "StreamItemViewController", bundle: nil, streamItem: streamItem)
     self.navigationController?.pushViewController(streamItemViewController, animated: true)
   }
 }
 
 extension MapViewController: CategoryCellActionDelegate {
-  func categorySelected(type: StreamItemType) {
+  func categorySelected(type: StreamItemType, added: Bool) {
     // Distinguish between between category view is present.
     if let view = categoryPickerView.superview {
       let composeView: ComposeStreamItemViewController = ComposeStreamItemViewController(nibName: "ComposeStreamItemViewController", bundle: nil, type: type)
       navigationController?.pushViewController(composeView, animated: true)
     } else {
-      selectedCategories.append(type)
+      if added {
+        selectedCategories.append(type)
+      } else {
+        selectedCategories.removeAtIndex(find(selectedCategories, type)!)
+      }
     }
   }
 }
 
 extension MapViewController: UIGestureRecognizerDelegate {
   func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-    return true
+    return false
   }
 }
 

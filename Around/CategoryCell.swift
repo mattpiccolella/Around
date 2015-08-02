@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CategoryCellActionDelegate {
-  func categorySelected(type: StreamItemType)
+  func categorySelected(type: StreamItemType, added: Bool)
 }
 
 class CategoryCell: UIView {
@@ -22,6 +22,9 @@ class CategoryCell: UIView {
   var type: StreamItemType!
   
   var delegate: CategoryCellActionDelegate?
+  
+  var selected: Bool = false
+  var shouldUpdate: Bool = false
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -58,11 +61,24 @@ class CategoryCell: UIView {
     typeButton.layer.cornerRadius = typeButton.frame.width / 2.0
     typeButton.layer.borderColor = View.AppColor.CGColor
     typeButton.layer.borderWidth = 1.0
-    typeButton.setImage(UIImage(named: type.rawValue), forState: .Normal)
-    typeButton.setImage(UIImage(named: type.rawValue), forState: .Selected)
+    setupButton(type, selected: false)
+  }
+  
+  func setupButton(type: StreamItemType, selected: Bool) {
+    typeButton.setImage(UIImage(named: getImageName(type, selected:selected)), forState: .Normal)
+    typeButton.setImage(UIImage(named: getImageName(type, selected: selected)), forState: .Selected)
+    typeButton.backgroundColor = selected ? View.AppColor : UIColor.whiteColor()
+  }
+  
+  func getImageName(type: StreamItemType, selected: Bool) -> String {
+    return selected ? "\(type.rawValue)-White" : "\(type.rawValue)-Black"
   }
 
   @IBAction func categoryButtonPressed(sender: AnyObject) {
-    delegate?.categorySelected(type)
+    selected = !selected
+    if shouldUpdate {
+      setupButton(type, selected: selected)
+    }
+    delegate?.categorySelected(type, added: selected)
   }
 }

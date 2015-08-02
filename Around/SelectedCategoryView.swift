@@ -17,7 +17,7 @@ class SelectedCategoryView: UIView {
   @IBOutlet var collectionView: UICollectionView!
   @IBOutlet var filterButton: UIButton!
   
-  convenience init(frame: CGRect, categories: [StreamItemType]) {
+  convenience init(frame: CGRect, categories: [StreamItemType], shouldUpdate: Bool) {
     self.init(frame: frame)
     self.categories = categories
   }

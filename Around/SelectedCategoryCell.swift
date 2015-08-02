@@ -17,7 +17,7 @@ class SelectedCategoryCell: UICollectionViewCell {
   @IBOutlet var filterImage: UIImageView!
   
   func inflate(type: StreamItemType) {
-    filterImage.image = UIImage(named: type.rawValue)
+    filterImage.image = UIImage(named: "\(type.rawValue)-Black")
   }
 
 }

@@ -25,6 +25,7 @@ class CategoryFilterView: UIView {
   var doneButtonHandler: (() -> Void)!
 
   let categoryNames: [StreamItemType] = [.Food, .Shopping, .Academic, .Entertainment, .Social, .Other]
+  var shouldUpdateCells: Bool = false
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -52,6 +53,7 @@ class CategoryFilterView: UIView {
     let categories: [CategoryCell] = [categoryOne, categoryTwo, categoryThree, categoryFour, categoryFive, categorySix]
     for i in 0...count(categories)-1 {
       categories[i].setupCell(categoryNames[i])
+      categories[i].shouldUpdate = shouldUpdateCells
       categories[i].delegate = delegate
     }
   }

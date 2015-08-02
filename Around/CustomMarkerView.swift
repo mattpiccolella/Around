@@ -42,6 +42,7 @@ class CustomMarkerView: UIView {
     distanceLabel.textColor = View.AppColor
     view.layer.cornerRadius = 5
     view.layer.masksToBounds = true
+    moreInfoButton.enabled = false
   }
   
   required init(coder aDecoder: NSCoder) {
@@ -71,10 +72,16 @@ class CustomMarkerView: UIView {
     }
   }
   
+  func setupGestureRecognizer() {
+    let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("infoButtonPressed:"))
+    view.addGestureRecognizer(tapRecognizer)
+  }
+  
   func setupNibSubview() {
     view = loadViewFromNib()
     view.frame = bounds
     addSubview(view)
+    setupGestureRecognizer()
   }
   
   func loadViewFromNib() -> UIView {
