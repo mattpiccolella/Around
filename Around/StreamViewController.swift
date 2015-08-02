@@ -65,11 +65,14 @@ class StreamViewController: BaseViewController {
   
   func rightBarButtonItem() -> UIBarButtonItem {
     let button: UIButton = barButtonImage(nil)
-    if let picture: PFFile? = PFUser.currentUser()!["profilePicture"] as? PFFile {
-      if let image: UIImage? = UIImage(data: picture!.getData()!) {
-        button.setImage(image, forState: .Normal)
-        button.setImage(image, forState: .Selected)
-      }
+    if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
+      picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+        if error == nil {
+          let image: UIImage? = UIImage(data: data!)
+          button.setImage(image, forState: .Normal)
+          button.setImage(image, forState: .Selected)
+        }
+      })
     }
     button.layer.cornerRadius = barButtonHeight / 2.0
     button.layer.masksToBounds = true

@@ -35,7 +35,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17h" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-GL-f0s">
-                                <rect key="frame" x="25" y="5" width="35" height="20"/>
+                                <rect key="frame" x="30" y="5" width="30" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                             <constraint firstItem="6he-qX-LSg" firstAttribute="top" secondItem="dAg-lh-eak" secondAttribute="top" constant="5" id="ayn-kD-MfR"/>
                             <constraint firstAttribute="height" constant="30" id="bnj-iv-OcL"/>
                             <constraint firstAttribute="bottom" secondItem="1tU-GL-f0s" secondAttribute="bottom" constant="5" id="e0f-Gs-oUM"/>
-                            <constraint firstItem="1tU-GL-f0s" firstAttribute="leading" secondItem="6he-qX-LSg" secondAttribute="trailing" id="npG-iG-0LP"/>
+                            <constraint firstItem="1tU-GL-f0s" firstAttribute="leading" secondItem="6he-qX-LSg" secondAttribute="trailing" constant="5" id="npG-iG-0LP"/>
                             <constraint firstAttribute="width" constant="60" id="oSx-LN-QP6"/>
                         </constraints>
                     </view>

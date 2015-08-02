@@ -9,6 +9,7 @@
                 <outlet property="composeButton" destination="swb-x1-gNh" id="1Sz-i0-t5A"/>
                 <outlet property="grayOverlay" destination="4VV-ZW-wuq" id="zjE-d8-BBk"/>
                 <outlet property="mapView" destination="AZT-lQ-7Ac" id="dId-S3-KOM"/>
+                <outlet property="selectedCategoryView" destination="Sgh-sG-Oge" id="bxD-MP-2Ib"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,6 +21,13 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZT-lQ-7Ac">
                     <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                 </mapView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgh-sG-Oge" customClass="SelectedCategoryView" customModule="Around" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="64" width="600" height="35"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="EWF-GU-ETp"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl2-eD-Bqa">
                     <rect key="frame" x="505" y="535" width="95" height="95"/>
                     <constraints>
@@ -57,10 +65,13 @@
                 <constraint firstAttribute="trailing" secondItem="AZT-lQ-7Ac" secondAttribute="trailing" id="ES9-h7-K5O"/>
                 <constraint firstAttribute="bottom" secondItem="dl2-eD-Bqa" secondAttribute="bottom" constant="-30" id="Ky7-Cg-f2S"/>
                 <constraint firstAttribute="trailing" secondItem="dl2-eD-Bqa" secondAttribute="trailing" id="Lz9-Ga-sUl"/>
+                <constraint firstItem="Sgh-sG-Oge" firstAttribute="leading" secondItem="AZT-lQ-7Ac" secondAttribute="leading" id="QAz-i5-FU9"/>
+                <constraint firstItem="Sgh-sG-Oge" firstAttribute="trailing" secondItem="AZT-lQ-7Ac" secondAttribute="trailing" id="Twm-Nw-Iff"/>
                 <constraint firstAttribute="trailing" secondItem="4VV-ZW-wuq" secondAttribute="trailing" id="WWg-tn-naf"/>
                 <constraint firstItem="AZT-lQ-7Ac" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aXv-x4-8qz"/>
                 <constraint firstItem="4VV-ZW-wuq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eUg-xZ-Wvc"/>
                 <constraint firstAttribute="bottom" secondItem="swb-x1-gNh" secondAttribute="bottom" constant="-20" id="eh5-rG-GmL"/>
+                <constraint firstItem="Sgh-sG-Oge" firstAttribute="top" secondItem="AZT-lQ-7Ac" secondAttribute="top" id="mLy-yI-9SR"/>
                 <constraint firstItem="AZT-lQ-7Ac" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="pyU-Og-OCs"/>
                 <constraint firstAttribute="bottom" secondItem="AZT-lQ-7Ac" secondAttribute="bottom" id="tkS-ge-C1n"/>
                 <constraint firstAttribute="bottom" secondItem="4VV-ZW-wuq" secondAttribute="bottom" id="w96-i0-jpM"/>

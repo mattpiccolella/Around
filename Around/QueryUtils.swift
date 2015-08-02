@@ -32,11 +32,6 @@ func getStreamItems(latitude: CGFloat, longitude: CGFloat, radius: CGFloat) -> P
 func getStreamItems(minPoint: CLLocationCoordinate2D, maxPoint: CLLocationCoordinate2D) -> PFQuery {
   let query: PFQuery = PFQuery(className: "StreamItem")
   let currentTime: NSTimeInterval = NSDate.timeIntervalSinceReferenceDate()
-  println("Long less than: \(maxPoint.longitude)")
-  println("Long greater than: \(minPoint.longitude)")
-  println("Lat less than: \(minPoint.latitude)")
-  println("Lat greater than: \(maxPoint.latitude)")
-  println("Expired greater than: \(currentTime)")
   query.whereKey("longitude", greaterThan: maxPoint.longitude)
   query.whereKey("longitude", lessThan: minPoint.longitude)
   query.whereKey("latitude", lessThan: minPoint.latitude)

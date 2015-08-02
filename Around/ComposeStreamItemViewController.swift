@@ -18,6 +18,8 @@ enum StreamItemType: String {
   case Other = "Other"
 }
 
+let streamItemAdded = "streamItemAdded"
+
 class ComposeStreamItemViewController: BaseViewController, UINavigationControllerDelegate {
   
   @IBOutlet var mapView: MKMapView!
@@ -119,9 +121,10 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
     streamItem.setObject(type.rawValue, forKey: "type")
     streamItem.saveInBackgroundWithBlock { (succeeded, error) -> Void in
       if succeeded {
-        println("Woohoo!")
+        self.navigationController?.popViewControllerAnimated(true)
+        NSNotificationCenter.defaultCenter().postNotificationName(streamItemAdded, object: nil)
       } else {
-        println("Daw :(")
+        self.navigationController?.popViewControllerAnimated(true)
       }
     }
   }

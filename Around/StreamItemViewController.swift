@@ -110,16 +110,14 @@ class StreamItemViewController: BaseViewController {
   
   func addDataForStreamItem() {
     postDescription.text = streamItem["description"] as? String
-    if let picture: PFFile? = streamItem["postPicture"] as? PFFile {
-      if let image: UIImage? = UIImage(data: picture!.getData()!) {
-        postPhoto.image = image
-        postPhoto.contentMode = UIViewContentMode.ScaleAspectFit
-      }
-    }
-    if let picture: PFFile? = PFUser.currentUser()!["profilePicture"] as? PFFile {
-      if let image: UIImage? = UIImage(data: picture!.getData()!) {
-        userPhoto.image = image
-      }
+    if let picture: PFFile = streamItem["postPicture"] as? PFFile {
+      picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+        if error == nil {
+          let image: UIImage? = UIImage(data: data!)
+          self.postPhoto.image = image
+          self.postPhoto.contentMode = UIViewContentMode.ScaleAspectFit
+        }
+      })
     }
     setDate(streamItem["postedTimestamp"] as! Double)
     setMapMarkerAndDistance(streamItem["latitude"] as! Double, longitude: streamItem["longitude"] as! Double)

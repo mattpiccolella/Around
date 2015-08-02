@@ -14,6 +14,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   @IBOutlet var grayOverlay: UIView!
   @IBOutlet var composeButton: UIButton!
   @IBOutlet var mapView: MKMapView!
+  @IBOutlet var selectedCategoryView: SelectedCategoryView!
   
   private var hasLoadedInitialMarkers: Bool = false
   private let annotationReuseIdentifier: String = "customAnnotationId"
@@ -37,6 +38,10 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+  }
     
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,14 +50,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     locationManager.startUpdatingLocation()
     mapView.delegate = self
     let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "mapViewTapped")
+    tapRecognizer.delegate = self
     mapView.addGestureRecognizer(tapRecognizer)
     
     let width: CGFloat = UIScreen.mainScreen().bounds.width
     let frame: CGRect = CGRectMake(0, 100, width, CategoryFilterView.viewHeight)
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("refreshMarkers"), name: streamItemAdded, object: nil)
 
     grayOverlay.hidden = true
     setupCategoryPickerView()
     setupCategoryFilterView()
+    selectedCategoryView.hidden = true
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -67,7 +76,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     } else {
       postSelected = false;
     }
-    
+    grayOverlay.hidden = true
+    categoryPickerView.removeFromSuperview()
+    categoryFilterView.removeFromSuperview()
     // TODO: Look into consistency and other things.
   }
   
@@ -76,7 +87,11 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   override func filterCategories() {
-    UIView.animateWithDuration(0.5, animations: addCategoryFilterView)
+    if grayOverlay.hidden {
+      UIView.animateWithDuration(0.5, animations: addCategoryFilterView)
+    } else {
+      UIView.animateWithDuration(0.5, animations: hideCategoryFilterView)
+    }
   }
   
   func addMapMarkers() {
@@ -108,6 +123,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
       locationManager.requestWhenInUseAuthorization()
     }
   }
+  
+  func refreshMarkers() {
+    fetchNewStreamItems({
+      self.addMapMarkers()
+    })
+  }
 
   override func leftButtonPushed() {
     self.navigationController?.setViewControllers([appDelegate.streamViewController], animated: false)
@@ -130,10 +151,13 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     let profileImage: UIImage = UIImage(named: "Profile")!
     let button: UIButton = barButtonImage(nil)
     if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
-      if let image: UIImage? = UIImage(data: picture.getData()!) {
-        button.setImage(image, forState: .Normal)
-        button.setImage(image, forState: .Selected)
-      }
+      picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+        if error == nil {
+          let image: UIImage? = UIImage(data: data!)
+          button.setImage(image, forState: .Normal)
+          button.setImage(image, forState: .Selected)
+        }
+      })
     }
     button.layer.cornerRadius = barButtonHeight / 2.0
     button.layer.masksToBounds = true
@@ -208,6 +232,9 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   func hideCategoryFilterView() {
     grayOverlay.hidden = true
     categoryFilterView.removeFromSuperview()
+    selectedCategoryView.hidden = count(selectedCategories) == 0
+    selectedCategoryView.categories = selectedCategories
+    selectedCategoryView.collectionView.reloadData()
   }
   
   func doneButtonPressed() {
@@ -245,7 +272,7 @@ extension MapViewController: MKMapViewDelegate {
         pinView.annotation = annotation
         return pinView
       } else {
-        let newPinView: MKAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
+        let newPinView: CustomAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
         newPinView.canShowCallout = false
         newPinView.image = UIImage(named: "Marker")
         return newPinView
@@ -256,19 +283,19 @@ extension MapViewController: MKMapViewDelegate {
   }
   
   func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-    println("Coordinate: \(mapView.centerCoordinate.latitude)")
     mapView.setCenterCoordinate(view.annotation.coordinate, animated: true)
-    println("Coordinate: \(mapView.centerCoordinate.latitude)")
-    let point: CGPoint = mapView.convertCoordinate(view.annotation.coordinate, toPointToView: mapView)
     markerView?.removeFromSuperview()
     if !view.annotation.isKindOfClass(MKUserLocation.self) {
       if let streamItem: PFObject? = findStreamItemById(view.annotation.title!) {
         let calloutHeight: CGFloat = CustomMarkerView.heightForView(streamItem!)
-        let calloutFrame: CGRect = CGRectMake(20.0, view.frame.origin.y - (view.frame.size.height), self.view.frame.size.width - 40.0, calloutHeight)
+        let calloutWidth: CGFloat = self.view.frame.size.width - 40.0
+        let calloutX: CGFloat = -calloutWidth / 2.0 + view.frame.size.width / 2.0
+        let calloutY: CGFloat = -calloutHeight - 10.0
+        let calloutFrame: CGRect = CGRectMake(calloutX, calloutY, calloutWidth, calloutHeight)
         markerView = CustomMarkerView(frame: calloutFrame)
         markerView!.setupView(streamItem!, location: appDelegate.location)
         markerView!.delegate = self
-        mapView.addSubview(markerView!)
+        view.addSubview(markerView!)
       }
     }
   }
@@ -296,3 +323,10 @@ extension MapViewController: CategoryCellActionDelegate {
     }
   }
 }
+
+extension MapViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    return true
+  }
+}
+

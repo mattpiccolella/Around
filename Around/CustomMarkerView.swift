@@ -52,10 +52,13 @@ class CustomMarkerView: UIView {
   func setupView(streamItem: PFObject, location: CLLocation?) {
     self.streamItem = streamItem
     postDescription.text = streamItem["description"] as? String
-    if let picture: PFFile? = PFUser.currentUser()!["profilePicture"] as? PFFile {
-      if let image: UIImage? = UIImage(data: picture!.getData()!) {
-        userPhoto.image = image
-      }
+    if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
+      picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+        if error == nil {
+          let image: UIImage? = UIImage(data: data!)
+          self.userPhoto.image = image
+        }
+      })
     }
     let dateFormatter: NSDateFormatter = NSDateFormatter()
     dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
