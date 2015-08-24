@@ -104,7 +104,7 @@ extension StreamViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let streamItemCell: StreamItemCell = collectionView.dequeueReusableCellWithReuseIdentifier(StreamItemCell.reuseIdentifier, forIndexPath: indexPath) as! StreamItemCell
     streamItemCell.setup()
-    streamItemCell.inflate(appDelegate.selectedStreamItems[indexPath.row])
+    streamItemCell.inflate(appDelegate.selectedStreamItems[indexPath.row], currentLocation: appDelegate.location)
     return streamItemCell
   }
   

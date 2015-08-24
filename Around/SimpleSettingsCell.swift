@@ -55,7 +55,6 @@ class SimpleSettingsCell: UICollectionViewCell {
             if error == nil {
               let image: UIImage? = UIImage(data: data!)
               self.cellLogo.image = image
-              self.cellLogo.contentMode = UIViewContentMode.ScaleAspectFit
             }
         })
       }

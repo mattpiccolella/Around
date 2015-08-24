@@ -39,7 +39,7 @@ class StreamItemCell: UICollectionViewCell {
     userPhoto.layer.masksToBounds = true
   }
   
-  func inflate(streamItem: PFObject) {
+  func inflate(streamItem: PFObject, currentLocation: CLLocation?) {
     postDescription.text = streamItem["description"] as? String
     let expirationDate: NSDate = NSDate(timeIntervalSinceReferenceDate: streamItem["expiredTimestamp"]!.doubleValue!)
     let timeInterval: NSTimeInterval = expirationDate.timeIntervalSinceNow
@@ -54,6 +54,11 @@ class StreamItemCell: UICollectionViewCell {
           self.userPhoto.image = image
         }
       })
+    }
+    if let currentLocation: CLLocation = currentLocation {
+      let postLocation: CLLocation = CLLocation(latitude: streamItem["latitude"] as! Double, longitude: streamItem["longitude"]as! Double)
+      let distance = postLocation.distanceFromLocation(currentLocation) * metersToMiles
+      distanceLabel.text = String(format: "%.02f mi", arguments: [distance])
     }
   }
   
