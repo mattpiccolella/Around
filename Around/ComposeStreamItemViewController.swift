@@ -37,7 +37,7 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
   var postPhoto: PFFile? = nil
   var datePickerView: UIDatePicker? = nil
   var isPickingTime: Bool = false
-  var timeSelected: NSTimeInterval = 0.0
+  var timeSelected: NSTimeInterval = 3600.0
   var postLocation: CLLocationCoordinate2D!
   
   var type: StreamItemType!
@@ -180,7 +180,19 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
     datePickerView!.datePickerMode = UIDatePickerMode.CountDownTimer
     datePickerView!.addTarget(self, action: "datePickerValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
     datePickerView!.minuteInterval = 5
+    datePickerView!.setDate(initialDate(), animated: false)
+    timeSelected = datePickerView!.countDownDuration
     view.addSubview(datePickerView!)
+  }
+  
+  func initialDate() -> NSDate {
+    var dateComp : NSDateComponents = NSDateComponents()
+    dateComp.hour = 1
+    dateComp.minute = 0
+    dateComp.timeZone = NSTimeZone.systemTimeZone()
+    var calendar : NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+    var date : NSDate = calendar.dateFromComponents(dateComp)!
+    return date
   }
   
   func datePickerValueChanged(sender: AnyObject) {

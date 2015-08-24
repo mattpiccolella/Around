@@ -11,7 +11,7 @@ import MapKit
 
 let metersToMiles: Double = 0.000621371
 
-class StreamItemViewController: BaseViewController {
+class StreamItemViewController: BaseViewController, UIGestureRecognizerDelegate {
   
   private let annotationReuseIdentifier: String = "customAnnotationId"
   
@@ -51,10 +51,11 @@ class StreamItemViewController: BaseViewController {
     setupViews()
     addDataForStreamItem()
     setupButtons()
+    addPhotoTapGesture()
   }
   
   override func viewWillAppear(animated: Bool) {
-    formatTopLevelNavBar("", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem(), color: Styles.Colors.GrayLabel)
+    formatTopLevelNavBar("", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
   }
   
   func rightBarButtonItem() -> UIBarButtonItem {
@@ -114,6 +115,22 @@ class StreamItemViewController: BaseViewController {
     }
   }
   
+  func addPhotoTapGesture() {
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "photoTapped")
+    tapGestureRecognizer.delegate = self
+    postPhoto.addGestureRecognizer(tapGestureRecognizer)
+    postPhoto.userInteractionEnabled = true
+  }
+  
+  func photoTapped() {
+    let imageInfo: JTSImageInfo = JTSImageInfo()
+    imageInfo.image = postPhoto.image!
+    imageInfo.referenceRect = postPhoto.frame
+    imageInfo.referenceView = postPhoto.superview
+    let imageViewer: JTSImageViewController = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: JTSImageViewControllerBackgroundOptions.None)
+    imageViewer.showFromViewController(self, transition: ._FromOriginalPosition)
+  }
+  
   func addDataForStreamItem() {
     postDescription.text = streamItem["description"] as? String
     if let picture: PFFile = streamItem["postPicture"] as? PFFile {
@@ -121,7 +138,8 @@ class StreamItemViewController: BaseViewController {
         if error == nil {
           let image: UIImage? = UIImage(data: data!)
           self.postPhoto.image = image
-          self.postPhoto.contentMode = UIViewContentMode.ScaleAspectFit
+          self.postPhoto.contentMode = UIViewContentMode.ScaleAspectFill
+          self.postPhoto.clipsToBounds = true
         }
       })
     }
@@ -132,7 +150,6 @@ class StreamItemViewController: BaseViewController {
           if error == nil {
             let image: UIImage? = UIImage(data: data!)
             self.userPhoto.image = image
-            self.userPhoto.contentMode = UIViewContentMode.ScaleAspectFit
           }
         })
       }

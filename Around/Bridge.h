@@ -10,5 +10,6 @@
 #define Around_Bridge_h
 
 #import <Parse/Parse.h>
+#import <JTSImageViewController/JTSImageViewController.h>
 
 #endif
