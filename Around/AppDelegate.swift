@@ -66,7 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var hasOnboarded = true
     let type: WelcomeViewType = hasOnboarded ? .Onboarded : .First
     let welcomeViewController: WelcomeViewController = WelcomeViewController(nibName: "WelcomeViewController", type: type)
-    return welcomeViewController
+    let navController: UINavigationController = UINavigationController(rootViewController: welcomeViewController)
+    return navController
   }
     
   func isLoggedIn() -> Bool {

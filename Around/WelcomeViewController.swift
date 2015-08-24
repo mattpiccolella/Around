@@ -33,15 +33,20 @@ class WelcomeViewController: UIViewController {
   convenience init(nibName nibNameOrNil: String?, type: WelcomeViewType) {
     self.init(nibName: nibNameOrNil, bundle: nil)
     self.type = type
+    setup(type)
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    setup(type)
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    setupNavBar()
   }
   
   func setup(type: WelcomeViewType) {
     view.backgroundColor = Styles.Colors.WelcomeColor
+    setupNavBar()
     // TODO: Switch fonts as necessary.
     titleLabel.textColor = UIColor.whiteColor()
     titleLabel.text = Strings.AppName.uppercaseString
@@ -72,6 +77,13 @@ class WelcomeViewController: UIViewController {
     }
   }
   
+  func setupNavBar() {
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.translucent = true
+    navigationController?.view.backgroundColor = UIColor.clearColor()
+  }
+  
   
   @IBAction func primaryButtonPressed(sender: AnyObject) {
     if type == .Onboarded {
@@ -82,6 +94,7 @@ class WelcomeViewController: UIViewController {
   }
 
   @IBAction func secondaryButtonPressed(sender: AnyObject) {
-    // TODO: Present registration page.
+    let registerController = SignupViewController(nibName: "SignupViewController", bundle: nil)
+    navigationController?.pushViewController(registerController, animated: true)
   }
 }

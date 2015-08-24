@@ -7,31 +7,31 @@
 //
 
 import UIKit
+import MapKit
 
-enum ActionMode: String {
-  case SignUp = "Sign Up"
-  case LogIn = "Log In"
-}
+class SignupViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-class SignupViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  
-  let confirmPasswordTopMargin: CGFloat = 16.0
-  let confirmPasswordBottomMargin: CGFloat = 16.0
   let bottomKeyboardSpacing: CGFloat = 8.0
+  let topBottomTermsPadding: CGFloat = 90.0
+  
+  let annotationReuseIdentifier = "markerId"
   
   var profilePicture: PFFile?
 
+  @IBOutlet var contentView: UIView!
+  @IBOutlet var termsLabel: UILabel!
+  @IBOutlet var scrollView: UIScrollView!
+  @IBOutlet var bottomSpacingConstraint: NSLayoutConstraint!
+  @IBOutlet var mapView: MKMapView!
   @IBOutlet var emailAddress: UITextField!
+  @IBOutlet var name: UITextField!
   @IBOutlet var password: UITextField!
-  @IBOutlet var confirmPassword: UITextField!
-  @IBOutlet var primaryAction: UIButton!
-  @IBOutlet var secondaryAction: UIButton!
-  @IBOutlet var confirmPasswordTopSpacing: NSLayoutConstraint!
-  @IBOutlet var confirmPasswordBottomSpacing: NSLayoutConstraint!
-  @IBOutlet var secondaryActionBottomSpacing: NSLayoutConstraint!
+  @IBOutlet var inputFieldView: UIView!
+  @IBOutlet var emailLogo: UIButton!
+  @IBOutlet var nameLogo: UIButton!
+  @IBOutlet var passwordLogo: UIButton!
 
   @IBOutlet var profilePictureButton: UIButton!
-  var action: ActionMode = .SignUp
 
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -40,6 +40,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
   }
 
   override func viewDidLoad() {
@@ -48,7 +49,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
   }
   
   override func viewDidAppear(animated: Bool) {
-    emailAddress.becomeFirstResponder()
+    //emailAddress.becomeFirstResponder()
   }
   
   deinit {
@@ -56,40 +57,72 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
   }
   
   func setupViews() {
-    
+    contentView.backgroundColor = Styles.Colors.LightGray
+    scrollView.backgroundColor = Styles.Colors.LightGray
+    termsLabel.text = Strings.PolicyWarning
+    termsLabel.font = Styles.Fonts.Body.Normal.Medium
+    termsLabel.textColor = Styles.Colors.GrayLabel
+    formatTopLevelNavBar("SIGN UP", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
+    mapView.userInteractionEnabled = false
+    mapView.delegate = self
+    profilePictureButton.layer.cornerRadius = profilePictureButton.frame.size.width / 2.0
+    setupFieldLogos()
+    setupMapView()
     toggleSignup()
     addObservers()
-    setUIForActions(action)
+  }
+  
+  func setupFieldLogos() {
+    emailLogo.layer.cornerRadius = emailLogo.frame.size.width / 2.0
+    emailLogo.layer.borderWidth = 1.0
+    emailLogo.layer.borderColor = Styles.Colors.GrayLabel.CGColor
+    nameLogo.layer.cornerRadius = nameLogo.frame.size.width / 2.0
+    nameLogo.layer.borderWidth = 1.0
+    nameLogo.layer.borderColor = Styles.Colors.GrayLabel.CGColor
+    passwordLogo.layer.cornerRadius = passwordLogo.frame.size.width / 2.0
+    passwordLogo.layer.borderWidth = 1.0
+    passwordLogo.layer.borderColor = Styles.Colors.GrayLabel.CGColor
+  }
+  
+  func setupMapView() {
+    let postCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: Global.DefaultLat, longitude: Global.DefaultLong)
+    let camera: MKMapCamera = MKMapCamera(lookingAtCenterCoordinate: postCoord, fromEyeCoordinate: postCoord, eyeAltitude: 1000)
+    mapView.camera = camera
+    let marker: MKPointAnnotation = MKPointAnnotation()
+    marker.coordinate = CLLocationCoordinate2DMake(Global.DefaultLat, Global.DefaultLong)
+    mapView.addAnnotation(marker)
+  }
+  
+  func rightBarButtonItem() -> UIBarButtonItem {
+    let rightBarButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: "performSignup")
+    rightBarButton.setTitleTextAttributes([NSFontAttributeName: Styles.Fonts.Title.SemiBold.Medium!], forState: UIControlState.Normal)
+    rightBarButton.setTitleTextAttributes([NSFontAttributeName: Styles.Fonts.Title.SemiBold.Medium!, NSForegroundColorAttributeName: Styles.Colors.GrayLabel], forState: UIControlState.Disabled)
+    return rightBarButton
   }
   
   func addObservers() {
     emailAddress.addTarget(self, action: "toggleSignup", forControlEvents: .EditingChanged)
+    name.addTarget(self, action: "toggleSignup", forControlEvents: .EditingChanged)
     password.addTarget(self, action: "toggleSignup", forControlEvents: .EditingChanged)
-    confirmPassword.addTarget(self, action: "toggleSignup", forControlEvents: .EditingChanged)
   }
   
   func toggleSignup() {
-    var canSignUp: Bool
-    if action == .SignUp {
-      canSignUp = count(emailAddress.text) > 0 && count(password.text) > 0 && count(confirmPassword.text) > 0 && password.text == confirmPassword.text && profilePicture != nil
-    } else {
-      canSignUp = count(emailAddress.text) > 0 && count(password.text) > 0
-    }
-    primaryAction.enabled = canSignUp
+    navigationItem.rightBarButtonItem?.enabled = count(emailAddress.text) > 0 && count(password.text) > 0 && count(name.text) > 0
   }
   
   @IBAction func performPrimaryAction(sender: AnyObject) {
-    if action == .SignUp {
-      performSignup()
-    } else {
-      performLogin()
+    let newUser: PFUser = PFUser()
+    newUser.username = emailAddress.text
+    newUser.password = password.text
+    newUser.email = emailAddress.text
+    newUser["profilePicture"] = profilePicture!
+    newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+      if success {
+        self.appDelegate.window!.rootViewController = self.appDelegate.loggedInView()
+      } else {
+        println("\(error)")
+      }
     }
-  }
-
-  @IBAction func performSecondaryAction(sender: AnyObject) {
-    let newAction = action == ActionMode.SignUp ? ActionMode.LogIn : ActionMode.SignUp
-    action = newAction
-    setUIForActions(newAction)
   }
   
   @IBAction func pickProfilePicture(sender: AnyObject) {
@@ -118,41 +151,16 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
       // TODO: I guess nothing?
     }
   }
-
-  func setUIForActions(actionType: ActionMode) {
-    if actionType == .SignUp {
-      UIView.animateWithDuration(0.1, animations: {
-        self.confirmPassword.hidden = false
-        self.confirmPasswordTopSpacing.constant = self.confirmPasswordTopMargin
-        self.confirmPasswordBottomSpacing.constant = self.confirmPasswordBottomMargin
-        self.primaryAction.setTitle("Sign Up", forState: .Normal)
-        self.primaryAction.setTitle("Sign Up", forState: .Disabled)
-        self.secondaryAction.setTitle("Log In", forState: .Normal)
-        self.secondaryAction.setTitle("Log In", forState: .Selected)
-        self.profilePictureButton.hidden = false
-        self.view.layoutIfNeeded()
-      })
-    } else {
-      UIView.animateWithDuration(0.1, animations: {
-        self.confirmPassword.hidden = true
-        self.confirmPasswordTopSpacing.constant = 0
-        self.confirmPasswordBottomSpacing.constant = 0
-        self.primaryAction.setTitle("Log In", forState: .Normal)
-        self.primaryAction.setTitle("Log In", forState: .Disabled)
-        self.secondaryAction.setTitle("Sign Up", forState: .Normal)
-        self.secondaryAction.setTitle("Sign Up", forState: .Selected)
-        self.profilePictureButton.hidden = true
-        self.view.layoutIfNeeded()
-      })
-    }
-  }
   
   func performSignup() {
     let newUser: PFUser = PFUser()
     newUser.username = emailAddress.text
     newUser.password = password.text
     newUser.email = emailAddress.text
-    newUser["profilePicture"] = profilePicture!
+    if profilePicture != nil {
+      newUser["profilePicture"] = profilePicture!
+    }
+    newUser["name"] = name.text
     newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
       if success {
         self.appDelegate.window!.rootViewController = self.appDelegate.loggedInView()
@@ -171,12 +179,25 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
       }
     }
   }
-  
+
   // MARK: Keyboard changes
   func keyboardWillShow(notification: NSNotification) {
     if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
-      self.secondaryActionBottomSpacing.constant = keyboardSize.height + bottomKeyboardSpacing
-      self.view.layoutIfNeeded()
+      UIView.animateWithDuration(0.3, animations: { () -> Void in
+        self.bottomSpacingConstraint.constant = keyboardSize.height
+        let newContentHeight = self.scrollView.contentSize.height - self.scrollView.frame.size.height + self.termsLabel.frame.size.height + self.topBottomTermsPadding + 20.0
+        self.scrollView.setContentOffset(CGPointMake(self.scrollView.contentOffset.x, newContentHeight), animated: false)
+        self.view.layoutIfNeeded()
+      })
+    }
+  }
+  
+  func keyboardWillHide(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+      UIView.animateWithDuration(0.3, animations: { () -> Void in
+        self.bottomSpacingConstraint.constant = 0
+        self.view.layoutIfNeeded()
+      })
     }
   }
 }
@@ -185,9 +206,24 @@ extension SignupViewController: UIImagePickerControllerDelegate {
   func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
     let imageData = UIImageJPEGRepresentation(image, 0.7)
     profilePicture = PFFile(data: imageData)
-    profilePictureButton.setImage(image, forState: .Normal)
-    profilePictureButton.setImage(image, forState: .Selected)
+    profilePictureButton.setBackgroundImage(image, forState: .Normal)
+    profilePictureButton.setBackgroundImage(image, forState: .Selected)
+    // TODO: Figure out why the image isn't a circle here.
     dismissViewControllerAnimated(true, completion: nil)
     toggleSignup()
+  }
+}
+
+extension SignupViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
+      pinView.annotation = annotation
+      return pinView
+    } else {
+      let newPinView: CustomAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
+      newPinView.canShowCallout = false
+      newPinView.image = UIImage(named: "Marker")
+      return newPinView
+    }
   }
 }

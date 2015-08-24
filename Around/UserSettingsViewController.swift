@@ -57,7 +57,7 @@ class UserSettingsViewController: BaseViewController {
     case 0:
       switch indexPath.row {
       case 0:
-        cell.inflate(UIImage(named: "Profile")!, text: "Current User", type: .Large)
+        cell.inflate(UIImage(named: "Profile")!, text: PFUser.currentUser()!["name"] as! String, type: .Large)
       case 1:
         cell.inflate(UIImage(named: "Mail")!, text: PFUser.currentUser()!.email!, type: .Small)
       case 2:

@@ -54,5 +54,6 @@ struct Styles {
   struct Colors {
     static let GrayLabel = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0)
     static let WelcomeColor = UIColor(red: 71.0/255.0, green: 171.0/255.0, blue: 122.0/255.0, alpha: 1.0)
+    static let LightGray = UIColor(red: 239.0/255.0, green: 239.0/255.0, blue: 239.0/255.0, alpha: 1.0)
   }
 }

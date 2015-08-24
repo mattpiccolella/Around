@@ -25,4 +25,6 @@ struct ParseInfo {
 
 struct Global {
   static let Delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+  static let DefaultLat: CLLocationDegrees = 40.8075
+  static let DefaultLong: CLLocationDegrees = -73.9619
 }

@@ -53,6 +53,9 @@ class CustomMarkerView: UIView {
   func setupView(streamItem: PFObject, location: CLLocation?) {
     self.streamItem = streamItem
     postDescription.text = streamItem["description"] as? String
+    if let postUser = streamItem["user"] as? PFObject {
+      userName.text = postUser["name"] as? String
+    }
     if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
       picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
         if error == nil {

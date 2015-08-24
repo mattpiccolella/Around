@@ -44,6 +44,9 @@ class StreamItemCell: UICollectionViewCell {
     let expirationDate: NSDate = NSDate(timeIntervalSinceReferenceDate: streamItem["expiredTimestamp"]!.doubleValue!)
     let timeInterval: NSTimeInterval = expirationDate.timeIntervalSinceNow
     timeRemaining.text = stringForRemainingTime((Int) (timeInterval / 60))
+    if let postUser = streamItem["user"] as? PFObject {
+      userName.text = postUser["name"] as? String
+    }
     if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
       picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
         if error == nil {
