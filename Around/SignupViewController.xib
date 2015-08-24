@@ -63,57 +63,6 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiK-z5-f9l">
                                     <rect key="frame" x="0.0" y="275" width="600" height="150"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9t-MI-F5L">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="70z-9c-6ML">
-                                                    <rect key="frame" x="60" y="18" width="520" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aa-Rr-CbK">
-                                                    <rect key="frame" x="10" y="10" width="30" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="Kef-MF-Pfq"/>
-                                                        <constraint firstAttribute="height" constant="30" id="Oxc-wj-vvr"/>
-                                                    </constraints>
-                                                    <inset key="contentEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
-                                                    <state key="normal" image="Email">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0I-8r-51F">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
-                                                    <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="1eH-7N-Ja2"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUk-yK-4rP">
-                                                    <rect key="frame" x="60" y="49" width="540" height="1"/>
-                                                    <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="dBK-J8-iWo"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="0aa-Rr-CbK" firstAttribute="top" secondItem="O9t-MI-F5L" secondAttribute="top" constant="10" id="1OA-YT-hnf"/>
-                                                <constraint firstAttribute="trailing" secondItem="kUk-yK-4rP" secondAttribute="trailing" id="CQl-vH-8ql"/>
-                                                <constraint firstItem="0aa-Rr-CbK" firstAttribute="leading" secondItem="O9t-MI-F5L" secondAttribute="leading" constant="10" id="EDa-ie-G0Y"/>
-                                                <constraint firstItem="0aa-Rr-CbK" firstAttribute="centerY" secondItem="70z-9c-6ML" secondAttribute="centerY" constant="-2" id="F6Q-Mx-h5t"/>
-                                                <constraint firstAttribute="trailing" secondItem="f0I-8r-51F" secondAttribute="trailing" id="NKe-gQ-Hqx"/>
-                                                <constraint firstItem="70z-9c-6ML" firstAttribute="leading" secondItem="0aa-Rr-CbK" secondAttribute="trailing" constant="20" id="Oyy-Rm-72n"/>
-                                                <constraint firstItem="kUk-yK-4rP" firstAttribute="leading" secondItem="70z-9c-6ML" secondAttribute="leading" id="ShO-X8-QpY"/>
-                                                <constraint firstItem="f0I-8r-51F" firstAttribute="top" secondItem="O9t-MI-F5L" secondAttribute="top" id="Y0d-zs-oxZ"/>
-                                                <constraint firstItem="f0I-8r-51F" firstAttribute="leading" secondItem="O9t-MI-F5L" secondAttribute="leading" id="aw3-Db-GvD"/>
-                                                <constraint firstAttribute="height" constant="50" id="cY2-3r-TTC"/>
-                                                <constraint firstAttribute="bottom" secondItem="kUk-yK-4rP" secondAttribute="bottom" id="hFM-wa-Yl5"/>
-                                                <constraint firstAttribute="width" secondItem="O9t-MI-F5L" secondAttribute="height" multiplier="12:1" id="hew-aM-mLX"/>
-                                                <constraint firstAttribute="trailing" secondItem="70z-9c-6ML" secondAttribute="trailing" constant="20" id="vKp-tn-asZ"/>
-                                            </constraints>
-                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ny-aH-aVw">
                                             <rect key="frame" x="0.0" y="50" width="600" height="50"/>
                                             <subviews>
@@ -193,6 +142,57 @@
                                                 <constraint firstItem="GDU-d3-oPW" firstAttribute="leading" secondItem="ntf-Oa-cn9" secondAttribute="leading" id="c2g-kk-uHP"/>
                                                 <constraint firstAttribute="bottom" secondItem="GDU-d3-oPW" secondAttribute="bottom" id="vS4-6Y-WdV"/>
                                                 <constraint firstItem="l5j-Ya-IQf" firstAttribute="centerY" secondItem="fq0-6o-OeY" secondAttribute="centerY" id="yZC-FQ-eOz"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9t-MI-F5L">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="70z-9c-6ML">
+                                                    <rect key="frame" x="60" y="18" width="520" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aa-Rr-CbK">
+                                                    <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="Kef-MF-Pfq"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Oxc-wj-vvr"/>
+                                                    </constraints>
+                                                    <inset key="contentEdgeInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                                                    <state key="normal" image="Email">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0I-8r-51F">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                                                    <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="1eH-7N-Ja2"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUk-yK-4rP">
+                                                    <rect key="frame" x="60" y="49" width="540" height="1"/>
+                                                    <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="dBK-J8-iWo"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="0aa-Rr-CbK" firstAttribute="top" secondItem="O9t-MI-F5L" secondAttribute="top" constant="10" id="1OA-YT-hnf"/>
+                                                <constraint firstAttribute="trailing" secondItem="kUk-yK-4rP" secondAttribute="trailing" id="CQl-vH-8ql"/>
+                                                <constraint firstItem="0aa-Rr-CbK" firstAttribute="leading" secondItem="O9t-MI-F5L" secondAttribute="leading" constant="10" id="EDa-ie-G0Y"/>
+                                                <constraint firstItem="0aa-Rr-CbK" firstAttribute="centerY" secondItem="70z-9c-6ML" secondAttribute="centerY" constant="-2" id="F6Q-Mx-h5t"/>
+                                                <constraint firstAttribute="trailing" secondItem="f0I-8r-51F" secondAttribute="trailing" id="NKe-gQ-Hqx"/>
+                                                <constraint firstItem="70z-9c-6ML" firstAttribute="leading" secondItem="0aa-Rr-CbK" secondAttribute="trailing" constant="20" id="Oyy-Rm-72n"/>
+                                                <constraint firstItem="kUk-yK-4rP" firstAttribute="leading" secondItem="70z-9c-6ML" secondAttribute="leading" id="ShO-X8-QpY"/>
+                                                <constraint firstItem="f0I-8r-51F" firstAttribute="top" secondItem="O9t-MI-F5L" secondAttribute="top" id="Y0d-zs-oxZ"/>
+                                                <constraint firstItem="f0I-8r-51F" firstAttribute="leading" secondItem="O9t-MI-F5L" secondAttribute="leading" id="aw3-Db-GvD"/>
+                                                <constraint firstAttribute="height" constant="50" id="cY2-3r-TTC"/>
+                                                <constraint firstAttribute="bottom" secondItem="kUk-yK-4rP" secondAttribute="bottom" id="hFM-wa-Yl5"/>
+                                                <constraint firstAttribute="width" secondItem="O9t-MI-F5L" secondAttribute="height" multiplier="12:1" id="hew-aM-mLX"/>
+                                                <constraint firstAttribute="trailing" secondItem="70z-9c-6ML" secondAttribute="trailing" constant="20" id="vKp-tn-asZ"/>
                                             </constraints>
                                         </view>
                                     </subviews>

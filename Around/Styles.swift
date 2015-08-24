@@ -25,6 +25,7 @@ struct Styles {
       
       struct SemiBold {
         static let fontName = "OpenSans-Semibold"
+        static let Small = UIFont(name: fontName, size: 14.0)
         static let Medium = UIFont(name: fontName, size: 20.0)
       }
       

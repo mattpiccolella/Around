@@ -146,7 +146,6 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func rightBarButtonItem() -> UIBarButtonItem {
-    // TODO: Make this a real profile image.
     let profileImage: UIImage = UIImage(named: "Profile")!
     let button: UIButton = barButtonImage(nil)
     if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {

@@ -13,10 +13,15 @@
 		5C448A391B1BFC55001DBE6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C448A381B1BFC55001DBE6C /* Images.xcassets */; };
 		5C448A3C1B1BFC55001DBE6C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C448A3A1B1BFC55001DBE6C /* LaunchScreen.xib */; };
 		5C448A481B1BFC55001DBE6C /* AroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448A471B1BFC55001DBE6C /* AroundTests.swift */; };
+		5C498AD81B8AD9650090EFD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C498AD61B8AD9650090EFD6 /* LoginViewController.swift */; };
+		5C498AD91B8AD9650090EFD6 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C498AD71B8AD9650090EFD6 /* LoginViewController.xib */; };
 		5C49F89C1B8A984A00A02662 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C49F89A1B8A984A00A02662 /* WelcomeViewController.swift */; };
 		5C49F89D1B8A984A00A02662 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C49F89B1B8A984A00A02662 /* WelcomeViewController.xib */; };
 		5C49F89F1B8A9CA300A02662 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C49F89E1B8A9CA300A02662 /* Strings.swift */; };
 		5C52835D1B6D3BE900ADE19D /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C52835C1B6D3BE900ADE19D /* CustomAnnotationView.swift */; };
+		5C79E9021B8B6A9600ACC4F8 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79E9001B8B6A9600ACC4F8 /* OnboardingViewController.swift */; };
+		5C79E9031B8B6A9600ACC4F8 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C79E9011B8B6A9600ACC4F8 /* OnboardingViewController.xib */; };
+		5C79E9051B8B719E00ACC4F8 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C79E9041B8B719E00ACC4F8 /* OnboardingManager.swift */; };
 		5C7BF0751B1C0CA600FEA569 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BF0741B1C0CA600FEA569 /* Constants.swift */; };
 		5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAED1B1C227100E202C2 /* MapViewController.swift */; };
 		5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C91BAEE1B1C227100E202C2 /* MapViewController.xib */; };
@@ -78,10 +83,15 @@
 		5C448A411B1BFC55001DBE6C /* AroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C448A461B1BFC55001DBE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C448A471B1BFC55001DBE6C /* AroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundTests.swift; sourceTree = "<group>"; };
+		5C498AD61B8AD9650090EFD6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5C498AD71B8AD9650090EFD6 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		5C49F89A1B8A984A00A02662 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5C49F89B1B8A984A00A02662 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		5C49F89E1B8A9CA300A02662 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5C52835C1B6D3BE900ADE19D /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		5C79E9001B8B6A9600ACC4F8 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		5C79E9011B8B6A9600ACC4F8 /* OnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingViewController.xib; sourceTree = "<group>"; };
+		5C79E9041B8B719E00ACC4F8 /* OnboardingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		5C7BF0741B1C0CA600FEA569 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5C91BAED1B1C227100E202C2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5C91BAEE1B1C227100E202C2 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
@@ -275,8 +285,12 @@
 			children = (
 				5CDFC2961B5C382500C49C34 /* SignupViewController.swift */,
 				5CDFC2971B5C382500C49C34 /* SignupViewController.xib */,
+				5C498AD61B8AD9650090EFD6 /* LoginViewController.swift */,
+				5C498AD71B8AD9650090EFD6 /* LoginViewController.xib */,
 				5C49F89A1B8A984A00A02662 /* WelcomeViewController.swift */,
 				5C49F89B1B8A984A00A02662 /* WelcomeViewController.xib */,
+				5C79E9001B8B6A9600ACC4F8 /* OnboardingViewController.swift */,
+				5C79E9011B8B6A9600ACC4F8 /* OnboardingViewController.xib */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -310,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				5CE3A1E01B578F1F0073E984 /* QueryUtils.swift */,
+				5C79E9041B8B719E00ACC4F8 /* OnboardingManager.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -406,8 +421,10 @@
 			files = (
 				5CDFC2831B5B783C00C49C34 /* StreamItemViewController.xib in Resources */,
 				5C448A3C1B1BFC55001DBE6C /* LaunchScreen.xib in Resources */,
+				5C498AD91B8AD9650090EFD6 /* LoginViewController.xib in Resources */,
 				5CDFC2881B5C123700C49C34 /* UserSettingsViewController.xib in Resources */,
 				5C91BAF01B1C227100E202C2 /* MapViewController.xib in Resources */,
+				5C79E9031B8B6A9600ACC4F8 /* OnboardingViewController.xib in Resources */,
 				5CE3A1D81B5765F70073E984 /* OpenSans-Bold.ttf in Resources */,
 				5CC5417D1B5F70C700B8C6DB /* CategoryCell.xib in Resources */,
 				5CDFC28C1B5C13FE00C49C34 /* SimpleSettingsCell.xib in Resources */,
@@ -481,6 +498,7 @@
 				5C448A321B1BFC55001DBE6C /* AppDelegate.swift in Sources */,
 				5CDFC28B1B5C13FE00C49C34 /* SimpleSettingsCell.swift in Sources */,
 				5C49F89C1B8A984A00A02662 /* WelcomeViewController.swift in Sources */,
+				5C79E9051B8B719E00ACC4F8 /* OnboardingManager.swift in Sources */,
 				5CC5417B1B5F704700B8C6DB /* CategoryCell.swift in Sources */,
 				5CE3A1E11B578F1F0073E984 /* QueryUtils.swift in Sources */,
 				5C998FBA1B6D2AED00B14459 /* SelectedCategoryView.swift in Sources */,
@@ -488,6 +506,8 @@
 				5C49F89F1B8A9CA300A02662 /* Strings.swift in Sources */,
 				5CC541811B5F722A00B8C6DB /* CategoryFilterView.swift in Sources */,
 				5CDFC2771B5A07F400C49C34 /* Utils.swift in Sources */,
+				5C79E9021B8B6A9600ACC4F8 /* OnboardingViewController.swift in Sources */,
+				5C498AD81B8AD9650090EFD6 /* LoginViewController.swift in Sources */,
 				5CE3A1DE1B5766940073E984 /* Styles.swift in Sources */,
 				5CDFC2821B5B783C00C49C34 /* StreamItemViewController.swift in Sources */,
 				5CDFC2981B5C382500C49C34 /* SignupViewController.swift in Sources */,

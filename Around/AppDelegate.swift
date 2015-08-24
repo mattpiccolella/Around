@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var mapViewController: MapViewController!
   var streamViewController: StreamViewController!
+  
+  var onboardingManager: OnboardingManager?
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // MARK: Parse configuration
@@ -63,8 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
     
   func loggedOutView() -> UIViewController {
-    var hasOnboarded = true
-    let type: WelcomeViewType = hasOnboarded ? .Onboarded : .First
+    var onboarded = NSUserDefaults.standardUserDefaults().boolForKey(hasOnboarded)
+    let type: WelcomeViewType = onboarded ? .Onboarded : .First
     let welcomeViewController: WelcomeViewController = WelcomeViewController(nibName: "WelcomeViewController", type: type)
     let navController: UINavigationController = UINavigationController(rootViewController: welcomeViewController)
     return navController

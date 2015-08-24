@@ -169,16 +169,6 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
       }
     }
   }
-  
-  func performLogin() {
-    PFUser.logInWithUsernameInBackground(emailAddress.text, password: password.text) { (currentUser, error) -> Void in
-      if currentUser != nil {
-        self.appDelegate.window!.rootViewController = self.appDelegate.loggedInView()
-      } else {
-        println("\(error)")
-      }
-    }
-  }
 
   // MARK: Keyboard changes
   func keyboardWillShow(notification: NSNotification) {

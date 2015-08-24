@@ -30,7 +30,6 @@ class CustomAnnotationView: MKAnnotationView {
         }
       }
     }
-    println("Time: \(time.timeIntervalSinceNow)")
     return isInside
   }
 }

@@ -7,18 +7,24 @@
 //
 
 import UIKit
+import MapKit
 
 enum WelcomeViewType: String {
   case Onboarded = "Onboarded"
   case First = "First"
 }
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: BaseViewController {
   
+  let mapOpacity: CGFloat = 0.85
+  let annotationReuseIdentifier = "reuseId"
+  
+  @IBOutlet var containerView: UIView!
   @IBOutlet var titleLabel: UILabel!
   @IBOutlet var descriptionLabel: UILabel!
   @IBOutlet var primaryButton: UIButton!
   @IBOutlet var secondaryButton: UIButton!
+  @IBOutlet var mapView: MKMapView!
 
   var type: WelcomeViewType!
   
@@ -33,11 +39,11 @@ class WelcomeViewController: UIViewController {
   convenience init(nibName nibNameOrNil: String?, type: WelcomeViewType) {
     self.init(nibName: nibNameOrNil, bundle: nil)
     self.type = type
-    setup(type)
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    setup(type)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -45,14 +51,15 @@ class WelcomeViewController: UIViewController {
   }
   
   func setup(type: WelcomeViewType) {
-    view.backgroundColor = Styles.Colors.WelcomeColor
     setupNavBar()
     // TODO: Switch fonts as necessary.
+    containerView.backgroundColor = Styles.Colors.WelcomeColor.colorWithAlphaComponent(mapOpacity)
     titleLabel.textColor = UIColor.whiteColor()
     titleLabel.text = Strings.AppName.uppercaseString
     descriptionLabel.textColor = UIColor.whiteColor()
     descriptionLabel.text = Strings.WelcomeMessage
     setupButtons(type)
+    setupBackgroundMapView()
   }
   
   func setupButtons(type: WelcomeViewType) {
@@ -84,17 +91,45 @@ class WelcomeViewController: UIViewController {
     navigationController?.view.backgroundColor = UIColor.clearColor()
   }
   
+  func setupBackgroundMapView() {
+    mapView.userInteractionEnabled = false
+    mapView.delegate = self
+    let postCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: Global.DefaultLat, longitude: Global.DefaultLong)
+    let camera: MKMapCamera = MKMapCamera(lookingAtCenterCoordinate: postCoord, fromEyeCoordinate: postCoord, eyeAltitude: 2000)
+    mapView.camera = camera
+    let marker: MKPointAnnotation = MKPointAnnotation()
+    marker.coordinate = CLLocationCoordinate2DMake(Global.DefaultLat, Global.DefaultLong)
+    mapView.addAnnotation(marker)
+  }
+  
   
   @IBAction func primaryButtonPressed(sender: AnyObject) {
     if type == .Onboarded {
-      // TODO: Present login.
+      let loginController = LoginViewController(nibName: "LoginViewController", bundle: nil)
+      navigationController?.pushViewController(loginController, animated: true)
     } else {
-      // TODO: Present onboarding.
+      appDelegate.onboardingManager = OnboardingManager()
+      let onboardingController = appDelegate.onboardingManager!.nextViewController()
+      navigationController?.pushViewController(onboardingController!, animated: true)
     }
   }
 
   @IBAction func secondaryButtonPressed(sender: AnyObject) {
     let registerController = SignupViewController(nibName: "SignupViewController", bundle: nil)
     navigationController?.pushViewController(registerController, animated: true)
+  }
+}
+
+extension WelcomeViewController: MKMapViewDelegate {
+  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
+      pinView.annotation = annotation
+      return pinView
+    } else {
+      let newPinView: CustomAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
+      newPinView.canShowCallout = false
+      newPinView.image = UIImage(named: "Marker")
+      return newPinView
+    }
   }
 }

@@ -55,15 +55,18 @@ class CustomMarkerView: UIView {
     postDescription.text = streamItem["description"] as? String
     if let postUser = streamItem["user"] as? PFObject {
       userName.text = postUser["name"] as? String
+      if let picture: PFFile = postUser["profilePicture"] as? PFFile {
+        picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+          if error == nil {
+            let image: UIImage? = UIImage(data: data!)
+            self.userPhoto.image = image
+          }
+        })
+      } else {
+        // TODO: Add a default profile image here.
+      }
     }
-    if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
-      picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
-        if error == nil {
-          let image: UIImage? = UIImage(data: data!)
-          self.userPhoto.image = image
-        }
-      })
-    }
+
     let dateFormatter: NSDateFormatter = NSDateFormatter()
     dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
     dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle

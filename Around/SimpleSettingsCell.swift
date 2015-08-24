@@ -41,12 +41,25 @@ class SimpleSettingsCell: UICollectionViewCell {
     layoutIfNeeded()
   }
   
-  func inflate(image: UIImage, text: String, type: SimpleSettingsCellType, lastCell: Bool = false) {
+  func inflate(image: UIImage?, text: String, type: SimpleSettingsCellType, lastCell: Bool = false) {
     self.type = type
     cellLabel.font = Styles.Fonts.Body.Normal.Medium
     cellLogo.layer.cornerRadius = type.rawValue / 2.0
     cellLogo.layer.masksToBounds = true
     cellLogo.contentMode = UIViewContentMode.ScaleAspectFit
+    if image != nil {
+      cellLogo.image = image
+    } else {
+      if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
+          picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+            if error == nil {
+              let image: UIImage? = UIImage(data: data!)
+              self.cellLogo.image = image
+              self.cellLogo.contentMode = UIViewContentMode.ScaleAspectFit
+            }
+        })
+      }
+    }
     cellLogo.image = image
     cellLabel.text = text
     imageDimenConstraint.constant = type.rawValue
@@ -56,7 +69,6 @@ class SimpleSettingsCell: UICollectionViewCell {
   
   class func heightForCell(type: SimpleSettingsCellType) -> CGFloat {
     let height: CGFloat = settingsTopRightPadding + type.rawValue
-    println("Height: \(height)")
     return settingsTopRightPadding + type.rawValue
   }
   
