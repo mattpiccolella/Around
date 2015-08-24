@@ -13,6 +13,9 @@
 		5C448A391B1BFC55001DBE6C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C448A381B1BFC55001DBE6C /* Images.xcassets */; };
 		5C448A3C1B1BFC55001DBE6C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C448A3A1B1BFC55001DBE6C /* LaunchScreen.xib */; };
 		5C448A481B1BFC55001DBE6C /* AroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448A471B1BFC55001DBE6C /* AroundTests.swift */; };
+		5C49F89C1B8A984A00A02662 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C49F89A1B8A984A00A02662 /* WelcomeViewController.swift */; };
+		5C49F89D1B8A984A00A02662 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C49F89B1B8A984A00A02662 /* WelcomeViewController.xib */; };
+		5C49F89F1B8A9CA300A02662 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C49F89E1B8A9CA300A02662 /* Strings.swift */; };
 		5C52835D1B6D3BE900ADE19D /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C52835C1B6D3BE900ADE19D /* CustomAnnotationView.swift */; };
 		5C7BF0751B1C0CA600FEA569 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BF0741B1C0CA600FEA569 /* Constants.swift */; };
 		5C91BAEF1B1C227100E202C2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BAED1B1C227100E202C2 /* MapViewController.swift */; };
@@ -75,6 +78,9 @@
 		5C448A411B1BFC55001DBE6C /* AroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C448A461B1BFC55001DBE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C448A471B1BFC55001DBE6C /* AroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundTests.swift; sourceTree = "<group>"; };
+		5C49F89A1B8A984A00A02662 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		5C49F89B1B8A984A00A02662 /* WelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		5C49F89E1B8A9CA300A02662 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5C52835C1B6D3BE900ADE19D /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		5C7BF0741B1C0CA600FEA569 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5C91BAED1B1C227100E202C2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +275,8 @@
 			children = (
 				5CDFC2961B5C382500C49C34 /* SignupViewController.swift */,
 				5CDFC2971B5C382500C49C34 /* SignupViewController.xib */,
+				5C49F89A1B8A984A00A02662 /* WelcomeViewController.swift */,
+				5C49F89B1B8A984A00A02662 /* WelcomeViewController.xib */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -293,6 +301,7 @@
 				5C91BAFA1B1C3C2800E202C2 /* ViewUtils.swift */,
 				5CE3A1DD1B5766940073E984 /* Styles.swift */,
 				5CDFC2761B5A07F400C49C34 /* Utils.swift */,
+				5C49F89E1B8A9CA300A02662 /* Strings.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -403,6 +412,7 @@
 				5CC5417D1B5F70C700B8C6DB /* CategoryCell.xib in Resources */,
 				5CDFC28C1B5C13FE00C49C34 /* SimpleSettingsCell.xib in Resources */,
 				5CDFC2991B5C382500C49C34 /* SignupViewController.xib in Resources */,
+				5C49F89D1B8A984A00A02662 /* WelcomeViewController.xib in Resources */,
 				5C998FC01B6D2DA600B14459 /* SelectedCategoryCell.xib in Resources */,
 				5CC5417F1B5F721500B8C6DB /* CategoryFilterView.xib in Resources */,
 				5CE3A1D91B5765F70073E984 /* OpenSans-Light.ttf in Resources */,
@@ -470,10 +480,12 @@
 				5CDFC2871B5C123700C49C34 /* UserSettingsViewController.swift in Sources */,
 				5C448A321B1BFC55001DBE6C /* AppDelegate.swift in Sources */,
 				5CDFC28B1B5C13FE00C49C34 /* SimpleSettingsCell.swift in Sources */,
+				5C49F89C1B8A984A00A02662 /* WelcomeViewController.swift in Sources */,
 				5CC5417B1B5F704700B8C6DB /* CategoryCell.swift in Sources */,
 				5CE3A1E11B578F1F0073E984 /* QueryUtils.swift in Sources */,
 				5C998FBA1B6D2AED00B14459 /* SelectedCategoryView.swift in Sources */,
 				5C7BF0751B1C0CA600FEA569 /* Constants.swift in Sources */,
+				5C49F89F1B8A9CA300A02662 /* Strings.swift in Sources */,
 				5CC541811B5F722A00B8C6DB /* CategoryFilterView.swift in Sources */,
 				5CDFC2771B5A07F400C49C34 /* Utils.swift in Sources */,
 				5CE3A1DE1B5766940073E984 /* Styles.swift in Sources */,

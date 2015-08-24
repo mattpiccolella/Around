@@ -63,8 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
     
   func loggedOutView() -> UIViewController {
-    let signupViewController: SignupViewController = SignupViewController(nibName: "SignupViewController", bundle: nil)
-    return signupViewController
+    var hasOnboarded = true
+    let type: WelcomeViewType = hasOnboarded ? .Onboarded : .First
+    let welcomeViewController: WelcomeViewController = WelcomeViewController(nibName: "WelcomeViewController", type: type)
+    return welcomeViewController
   }
     
   func isLoggedIn() -> Bool {

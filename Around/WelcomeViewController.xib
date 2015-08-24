@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeViewController" customModule="Around" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="Ws9-1D-c7Y" id="XdN-iM-HSo"/>
+                <outlet property="primaryButton" destination="O1e-m2-f6W" id="Kol-u4-i9m"/>
+                <outlet property="secondaryButton" destination="DSQ-ua-wl6" id="1Rx-Pv-pSg"/>
+                <outlet property="titleLabel" destination="kEQ-3F-Bdy" id="dmB-fI-5JZ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEQ-3F-Bdy">
+                    <rect key="frame" x="20" y="159" width="560" height="47"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ws9-1D-c7Y">
+                    <rect key="frame" x="20" y="226" width="560" height="20.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1e-m2-f6W">
+                    <rect key="frame" x="20" y="540" width="560" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="wwS-Di-Xt8"/>
+                    </constraints>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="primaryButtonPressed:" destination="-1" eventType="touchUpInside" id="88e-WZ-BJS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSQ-ua-wl6">
+                    <rect key="frame" x="20" y="490" width="560" height="40"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="secondaryButtonPressed:" destination="-1" eventType="touchUpInside" id="6Dg-3l-RHQ"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="go1-iK-XvQ">
+                    <rect key="frame" x="263" y="64" width="75" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="VKS-2h-geZ"/>
+                        <constraint firstAttribute="width" constant="75" id="c0c-aN-yT1"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="kEQ-3F-Bdy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="6jz-RG-jfm"/>
+                <constraint firstItem="O1e-m2-f6W" firstAttribute="leading" secondItem="DSQ-ua-wl6" secondAttribute="leading" id="Bbk-mb-pTx"/>
+                <constraint firstAttribute="trailing" secondItem="Ws9-1D-c7Y" secondAttribute="trailing" constant="20" id="Bgg-k8-Tb0"/>
+                <constraint firstItem="O1e-m2-f6W" firstAttribute="height" secondItem="DSQ-ua-wl6" secondAttribute="height" id="O0a-tv-Yh4"/>
+                <constraint firstAttribute="bottom" secondItem="O1e-m2-f6W" secondAttribute="bottom" constant="20" id="R8V-0p-mBS"/>
+                <constraint firstItem="kEQ-3F-Bdy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="RIQ-Rc-tb3"/>
+                <constraint firstAttribute="trailing" secondItem="O1e-m2-f6W" secondAttribute="trailing" constant="20" id="TOZ-6Y-Kqj"/>
+                <constraint firstItem="go1-iK-XvQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Vui-qY-u3f"/>
+                <constraint firstItem="O1e-m2-f6W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="b8s-jd-sgy"/>
+                <constraint firstAttribute="centerX" secondItem="go1-iK-XvQ" secondAttribute="centerX" id="cF9-A9-wex"/>
+                <constraint firstItem="O1e-m2-f6W" firstAttribute="top" secondItem="DSQ-ua-wl6" secondAttribute="bottom" constant="10" id="hDD-8I-Jzr"/>
+                <constraint firstItem="kEQ-3F-Bdy" firstAttribute="top" secondItem="go1-iK-XvQ" secondAttribute="bottom" constant="20" id="lqr-Mb-auh"/>
+                <constraint firstAttribute="trailing" secondItem="kEQ-3F-Bdy" secondAttribute="trailing" constant="20" id="njN-si-Vbi"/>
+                <constraint firstItem="O1e-m2-f6W" firstAttribute="width" secondItem="DSQ-ua-wl6" secondAttribute="width" id="oa4-sL-Vbe"/>
+                <constraint firstItem="Ws9-1D-c7Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="s4A-KW-GEw"/>
+                <constraint firstItem="Ws9-1D-c7Y" firstAttribute="top" secondItem="kEQ-3F-Bdy" secondAttribute="bottom" constant="20" id="tI2-4c-XUj"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="WelcomeLogo" width="140" height="140"/>
+    </resources>
+</document>

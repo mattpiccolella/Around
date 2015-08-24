@@ -20,6 +20,7 @@ struct Styles {
         static let fontName = "OpenSans-Regular"
         static let Medium = UIFont(name: fontName, size: 20.0)
         static let Large = UIFont(name: fontName, size: 30.0)
+        static let XLarge = UIFont(name: fontName, size: 40.0)
       }
       
       struct SemiBold {
@@ -52,5 +53,6 @@ struct Styles {
   
   struct Colors {
     static let GrayLabel = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1.0)
+    static let WelcomeColor = UIColor(red: 71.0/255.0, green: 171.0/255.0, blue: 122.0/255.0, alpha: 1.0)
   }
 }
