@@ -10,9 +10,19 @@ import UIKit
 
 class StreamViewController: BaseViewController {
   
+  let leftRightPadding: CGFloat = 40.0
+  let navBarHeight: CGFloat = 64.0
+  let selectedCategoryDefaultHeight: CGFloat = 35.0
+  
   @IBOutlet var collectionView: UICollectionView!
+  @IBOutlet var selectedCategoryView: SelectedCategoryView!
   var refreshControl: UIRefreshControl!
+  var categoryFilterView: CategoryFilterView!
+  var filterGrayOverlay: UIView!
 
+  @IBOutlet var selectedCategoryHeight: NSLayoutConstraint!
+  @IBOutlet var collectionViewTopSpacing: NSLayoutConstraint!
+  
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
@@ -24,12 +34,22 @@ class StreamViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupCollectionView()
+    setupCategoryFilterView()
+    updateSelectedCategoryView()
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("addCategoryFilterView"), name: SelectedCategoryView.tappedNotification, object: nil)
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
   override func viewWillAppear(animated: Bool) {
     formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
     
     collectionView.reloadData()
+    updateSelectedCategoryView()
+    filterGrayOverlay.hidden = true
   }
 
   override func didReceiveMemoryWarning() {
@@ -90,6 +110,51 @@ class StreamViewController: BaseViewController {
       self.collectionView.reloadData()
     }
   }
+  
+  // MARK: Filtering
+  func setupCategoryFilterView() {
+    let frame: CGRect = CGRectMake(leftRightPadding / 2.0, navBarHeight, UIScreen.mainScreen().bounds.width - leftRightPadding, CategoryFilterView.viewHeight)
+    categoryFilterView = CategoryFilterView(frame: frame)
+    categoryFilterView.shouldUpdateCells = true
+    categoryFilterView.setupCategoryCells(self)
+    categoryFilterView.setupDoneButton(doneButtonPressed)
+    
+    // Also add gray overlay
+    let filterFrame: CGRect = CGRectMake(0, navBarHeight, UIScreen.mainScreen().bounds.width, CategoryFilterView.viewHeight)
+    filterGrayOverlay = UIView(frame: filterFrame)
+    filterGrayOverlay.backgroundColor = UIColor.lightGrayColor()
+    filterGrayOverlay.alpha = 0.8
+    filterGrayOverlay.hidden = true
+    view.addSubview(filterGrayOverlay)
+  }
+  
+  func addCategoryFilterView() {
+    filterGrayOverlay.hidden = false
+    categoryFilterView.selectedCategories = appDelegate.selectedCategories
+    categoryFilterView.setupCategoryCells(self)
+    view.addSubview(categoryFilterView)
+  }
+  
+  func hideCategoryFilterView() {
+    filterGrayOverlay.hidden = true
+    categoryFilterView.removeFromSuperview()
+    //selectedCategoryView.hidden = count(appDelegate.selectedCategories) == 0
+    //selectedCategoryView.categories = appDelegate.selectedCategories
+    //selectedCategoryView.collectionView.reloadData()
+  }
+  
+  func doneButtonPressed() {
+    hideCategoryFilterView()
+    updateSelectedCategoryView()
+  }
+  
+  func updateSelectedCategoryView() {
+    selectedCategoryHeight.constant = count(appDelegate.selectedCategories) == 0 ? 0 : selectedCategoryDefaultHeight
+    selectedCategoryView.categories = appDelegate.selectedCategories
+    selectedCategoryView.collectionView.reloadData()
+    collectionViewTopSpacing.constant = count(appDelegate.selectedCategories) == 0 ? 0 : selectedCategoryDefaultHeight
+    view.layoutIfNeeded()
+  }
 }
 
 extension StreamViewController: UICollectionViewDataSource {
@@ -104,7 +169,25 @@ extension StreamViewController: UICollectionViewDataSource {
     return appDelegate.selectedStreamItems.count
   }
   
-  
+  override func filterCategories() {
+    if filterGrayOverlay.hidden {
+      UIView.animateWithDuration(0.5, animations: addCategoryFilterView)
+    } else {
+      UIView.animateWithDuration(0.5, animations: hideCategoryFilterView)
+    }
+  }
+}
+
+extension StreamViewController: CategoryCellActionDelegate {
+  func categorySelected(type: StreamItemType, added: Bool) {
+    if added {
+      appDelegate.selectedCategories.append(type)
+    } else {
+      appDelegate.selectedCategories.removeAtIndex(find(appDelegate.selectedCategories, type)!)
+    }
+    filterStreamItems()
+    collectionView.reloadData()
+  }
 }
 
 extension StreamViewController: UICollectionViewDelegate {

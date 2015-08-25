@@ -78,6 +78,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
       postSelected = false
     }
     pickerGrayOverlay.hidden = true
+    filterGrayOverlay.hidden = true
     hideCategoryFilterView()
     hideCategoryPickerView()
     // TODO: Look into consistency and other things.
