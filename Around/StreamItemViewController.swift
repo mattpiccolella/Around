@@ -68,18 +68,11 @@ class StreamItemViewController: BaseViewController, UIGestureRecognizerDelegate 
   }
   
   func rightButtonPushed() {
-    let alertController: UIAlertController = UIAlertController(title: "Share Post", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-    let facebookShare: UIAlertAction = UIAlertAction(title: "Facebook", style: .Default) { (alert) -> Void in
-      // TODO: Actually share to Facebook
-    }
-    let twitterShare: UIAlertAction = UIAlertAction(title: "Twitter", style: .Default) { (alert) -> Void in
-      // TODO: Actually share to Twitter
-    }
-    let cancelShare: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-    alertController.addAction(facebookShare)
-    alertController.addAction(twitterShare)
-    alertController.addAction(cancelShare)
-    presentViewController(alertController, animated: true, completion: nil)
+    let shareText: String = streamItem["description"] as! String
+    let image: UIImage = postPhoto.image!
+    let activityController = UIActivityViewController(activityItems: [shareText, image], applicationActivities: nil)
+    activityController.excludedActivityTypes = [UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeAssignToContact,UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
+    presentViewController(activityController, animated: true, completion: nil)
   }
   
   func setupViews() {

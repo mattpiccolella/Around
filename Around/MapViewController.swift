@@ -11,10 +11,11 @@ import MapKit
 
 class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
-  @IBOutlet var grayOverlay: UIView!
+  @IBOutlet var pickerGrayOverlay: UIView!
   @IBOutlet var composeButton: UIButton!
   @IBOutlet var mapView: MKMapView!
   @IBOutlet var selectedCategoryView: SelectedCategoryView!
+  var filterGrayOverlay: UIView!
 
   private var hasLoadedInitialMarkers: Bool = false
   private let annotationReuseIdentifier: String = "customAnnotationId"
@@ -28,6 +29,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   let composeButtonBottomPadding: CGFloat = 50.0
   let composeButtonLeftRightPadding: CGFloat = 40.0
   let navBarHeight: CGFloat = 64.0
+  let pickerViewBottomPadding: CGFloat = 30.0
     
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -57,7 +59,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("refreshMarkers"), name: streamItemAdded, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("addCategoryFilterView"), name: SelectedCategoryView.tappedNotification, object: nil)
 
-    grayOverlay.hidden = true
+    pickerGrayOverlay.hidden = true
     setupCategoryPickerView()
     setupCategoryFilterView()
     selectedCategoryView.hidden = true
@@ -75,7 +77,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     } else {
       postSelected = false
     }
-    grayOverlay.hidden = true
+    pickerGrayOverlay.hidden = true
     hideCategoryFilterView()
     hideCategoryPickerView()
     // TODO: Look into consistency and other things.
@@ -86,7 +88,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   override func filterCategories() {
-    if grayOverlay.hidden {
+    if filterGrayOverlay.hidden {
       UIView.animateWithDuration(0.5, animations: addCategoryFilterView)
     } else {
       UIView.animateWithDuration(0.5, animations: hideCategoryFilterView)
@@ -176,7 +178,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
 
   @IBAction func composeButtonPressed(sender: AnyObject) {
-    if grayOverlay.hidden {
+    if pickerGrayOverlay.hidden {
       UIView.animateWithDuration(0.5, animations: addCategoryPickerView)
     } else {
       UIView.animateWithDuration(0.5, animations: hideCategoryPickerView)
@@ -193,16 +195,18 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func setupCategoryPickerView() {
-    let frame: CGRect = CGRectMake(composeButtonLeftRightPadding / 2.0, composeButton.frame.origin.y - composeButtonBottomPadding - CategoryFilterView.viewHeight + CategoryFilterView.doneButtonHeight, UIScreen.mainScreen().bounds.width - composeButtonLeftRightPadding, CategoryFilterView.viewHeight)
+    let frame: CGRect = CGRectMake(composeButtonLeftRightPadding / 2.0, composeButton.frame.origin.y - CategoryFilterView.viewHeight + pickerViewBottomPadding, UIScreen.mainScreen().bounds.width - composeButtonLeftRightPadding, CategoryFilterView.viewHeight)
     categoryPickerView = CategoryFilterView(frame: frame)
     categoryPickerView.setupCategoryCells(self)
     categoryPickerView.doneButton.hidden = true
   }
   
   func addCategoryPickerView() {
+    setupCategoryPickerView()
     markerView?.removeFromSuperview()
     markerView = nil
-    grayOverlay.hidden = false
+
+    pickerGrayOverlay.hidden = false
     categoryFilterView.removeFromSuperview()
     view.addSubview(self.categoryPickerView)
     composeButton.setImage(UIImage(named: "XButton"), forState: .Normal)
@@ -210,8 +214,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func hideCategoryPickerView() {
-    self.grayOverlay.hidden = true
-    self.categoryPickerView.removeFromSuperview()
+    pickerGrayOverlay.hidden = true
+    categoryPickerView.removeFromSuperview()
     composeButton.setImage(UIImage(named: "Pinpoint"), forState: .Normal)
     composeButton.setImage(UIImage(named: "Pinpoint"), forState: .Selected)
   }
@@ -222,12 +226,19 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     categoryFilterView.shouldUpdateCells = true
     categoryFilterView.setupCategoryCells(self)
     categoryFilterView.setupDoneButton(doneButtonPressed)
+    
+    // Also add gray overlay
+    let filterFrame: CGRect = CGRectMake(0, navBarHeight, UIScreen.mainScreen().bounds.width, CategoryFilterView.viewHeight)
+    filterGrayOverlay = UIView(frame: filterFrame)
+    filterGrayOverlay.backgroundColor = UIColor.lightGrayColor()
+    filterGrayOverlay.alpha = 0.8
+    view.addSubview(filterGrayOverlay)
   }
   
   func addCategoryFilterView() {
     markerView?.removeFromSuperview()
     markerView = nil
-    grayOverlay.hidden = false
+    filterGrayOverlay.hidden = false
     categoryFilterView.selectedCategories = appDelegate.selectedCategories
     categoryFilterView.setupCategoryCells(self)
     categoryPickerView.removeFromSuperview()
@@ -235,7 +246,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func hideCategoryFilterView() {
-    grayOverlay.hidden = true
+    filterGrayOverlay.hidden = true
     categoryFilterView.removeFromSuperview()
     selectedCategoryView.hidden = count(appDelegate.selectedCategories) == 0
     selectedCategoryView.categories = appDelegate.selectedCategories
