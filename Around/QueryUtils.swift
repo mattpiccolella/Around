@@ -43,9 +43,11 @@ func getStreamItems(minPoint: CLLocationCoordinate2D, maxPoint: CLLocationCoordi
   return query
 }
 
-func getStreamItems(user: PFObject) -> PFQuery {
+func getPostHistoryQuery(user: PFObject) -> PFQuery {
   let query: PFQuery = PFQuery(className: "StreamItem")
-  query.whereKey("userId", lessThan: user.objectId!)
+  query.whereKey("user", equalTo: user)
+  query.includeKey("user")
+  query.addDescendingOrder("postedTimestamp")
   return query
 }
 

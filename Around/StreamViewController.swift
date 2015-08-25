@@ -50,14 +50,6 @@ class StreamViewController: BaseViewController {
     collectionView.addSubview(refreshControl)
   }
   
-  func setupFlowLayout() {
-    let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    flowLayout.minimumInteritemSpacing = 0.0
-    flowLayout.minimumLineSpacing = 0.0
-    flowLayout.scrollDirection = .Vertical
-    collectionView.collectionViewLayout = flowLayout
-  }
-  
   override func leftBarButtonItem() -> UIBarButtonItem {
     let listImage: UIImage = UIImage(named: "Map")!
     let button: UIButton = barButtonImage(listImage)

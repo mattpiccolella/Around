@@ -126,6 +126,7 @@
             <connections>
                 <outlet property="distanceLabel" destination="RcT-uv-11E" id="Wji-FB-j5s"/>
                 <outlet property="postDescription" destination="ZS9-YI-vsi" id="7ui-tF-nfg"/>
+                <outlet property="timeContainer" destination="dAg-lh-eak" id="xsz-Zy-dnC"/>
                 <outlet property="timeRemaining" destination="1tU-GL-f0s" id="XMm-y2-lD8"/>
                 <outlet property="userName" destination="v4I-H0-xc8" id="sPE-Jl-AUr"/>
                 <outlet property="userPhoto" destination="Tun-mh-R4n" id="OgT-vF-URe"/>

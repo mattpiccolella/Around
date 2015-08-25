@@ -188,8 +188,8 @@ extension UserSettingsViewController: UserSettingsActionDelegate {
     println("Handle Profile Change - Not Implemented")
   }
   func viewPostHistory() {
-    // TODO: Implement
-    println("View Post History - Not Implemented")
+    let postHistoryController: PostHistoryViewController = PostHistoryViewController(nibName: "PostHistoryViewController", bundle: nil)
+    navigationController?.pushViewController(postHistoryController, animated: true)
   }
   func changePassword() {
     // TODO: Implement

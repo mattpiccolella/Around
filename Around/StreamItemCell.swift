@@ -20,6 +20,7 @@ class StreamItemCell: UICollectionViewCell {
   @IBOutlet var userPhoto: UIImageView!
   @IBOutlet var userName: UILabel!
   @IBOutlet var timeRemaining: UILabel!
+  @IBOutlet var timeContainer: UIView!
   @IBOutlet var distanceLabel: UILabel!
 
   override func awakeFromNib() {
@@ -44,6 +45,11 @@ class StreamItemCell: UICollectionViewCell {
     let expirationDate: NSDate = NSDate(timeIntervalSinceReferenceDate: streamItem["expiredTimestamp"]!.doubleValue!)
     let timeInterval: NSTimeInterval = expirationDate.timeIntervalSinceNow
     timeRemaining.text = stringForRemainingTime((Int) (timeInterval / 60))
+    if timeInterval < 0 {
+      timeContainer.hidden = true
+    } else {
+      timeContainer.hidden = false
+    }
     if let postUser = streamItem["user"] as? PFObject {
       userName.text = postUser["name"] as? String
     }
