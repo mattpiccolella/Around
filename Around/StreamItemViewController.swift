@@ -99,9 +99,13 @@ class StreamItemViewController: BaseViewController, UIGestureRecognizerDelegate 
     reportButton.layer.borderColor = View.AppColor.CGColor!
     reportButton.titleLabel?.font = Styles.Fonts.Body.Normal.Large
     reportButton.tintColor = View.AppColor
+    reportButton.setImage(scaleImage(UIImage(named: "Trash")!, 0.8), forState: .Normal)
+    reportButton.imageEdgeInsets = UIEdgeInsetsMake(0, -12, 0, 0)
     if distance < upvoteCutoff {
       favoriteButton.setTitle("Upvote", forState: .Normal)
       favoriteButton.setTitle("Upvote", forState: .Selected)
+      favoriteButton.setImage(scaleImage(UIImage(named: "Upvote")!, 0.7), forState: .Normal)
+      favoriteButton.imageEdgeInsets = UIEdgeInsetsMake(0, -12, 0, 0)
     } else {
       favoriteButton.setTitle("Get Directions", forState: .Normal)
       favoriteButton.setTitle("Get Directions", forState: .Selected)

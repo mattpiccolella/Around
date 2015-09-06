@@ -42,7 +42,7 @@ class CustomMarkerView: UIView {
     distanceLabel.textColor = View.AppColor
     view.layer.cornerRadius = 5
     view.layer.masksToBounds = true
-    moreInfoButton.enabled = false
+    moreInfoButton.enabled = true
   }
   
   required init(coder aDecoder: NSCoder) {
@@ -76,6 +76,9 @@ class CustomMarkerView: UIView {
       let distance = postLocation.distanceFromLocation(currentLocation) * metersToMiles
       distanceLabel.text = String(format: "%.02f mi", arguments: [distance])
     }
+    view.layer.cornerRadius = 5.0
+    view.layer.borderWidth = 1.0
+    view.layer.borderColor = Styles.Colors.MarkerBorder.CGColor
   }
   
   func setupGestureRecognizer() {

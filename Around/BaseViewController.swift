@@ -16,12 +16,12 @@ class BaseViewController: UIViewController {
   
   let appDelegate: AppDelegate = Global.Delegate
   
-  func formatTopLevelNavBar(title: String, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil, color: UIColor = View.AppColor) {
+  func formatTopLevelNavBar(title: String, leftBarButton: UIBarButtonItem? = nil, rightBarButton: UIBarButtonItem? = nil, color: UIColor = View.AppColor, isFilter: Bool = false) {
     self.navigationController?.navigationBar.translucent = true
     self.navigationController?.navigationBar.setBackgroundImage(imageNavBarBackground(color), forBarMetrics: .Default)
     self.navigationController?.navigationBar.barTintColor = color
     self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-    self.navigationItem.titleView = titleView(title)
+    self.navigationItem.titleView = isFilter ? filterTitleView(false) : titleView(title)
     if leftBarButton != nil {
       self.navigationItem.leftBarButtonItem = leftBarButton
     }
@@ -40,6 +40,28 @@ class BaseViewController: UIViewController {
     label.sizeToFit()
     addFilterGestureRecognizer(label)
     return label
+  }
+  
+  func filterTitleView(isFiltering: Bool) -> UIButton {
+    let button: UIButton = UIButton(frame: CGRectZero)
+    button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    button.setTitle("FILTER", forState: .Normal)
+    button.setTitle("FILTER", forState: .Selected)
+    button.backgroundColor = UIColor.clearColor()
+    button.titleLabel?.font = Styles.Fonts.Title.SemiBold.Medium
+    button.titleLabel?.textAlignment = .Center
+    button.titleLabel?.sizeToFit()
+    button.userInteractionEnabled = true
+    let image = isFiltering ? UIImage(named: "UpArrowWhite") : UIImage(named: "DownArrowWhite")
+    let scaledImage = scaleImage(image!, 0.7)
+    button.setImage(scaledImage, forState: .Normal)
+    button.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    button.titleLabel?.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    button.imageView?.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    button.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0)
+    button.sizeToFit()
+    button.addTarget(self, action: "filterCategories", forControlEvents: .TouchUpInside)
+    return button
   }
   
   func addFilterGestureRecognizer(label: UILabel) {

@@ -45,10 +45,12 @@ class StreamViewController: BaseViewController {
   }
   
   override func viewWillAppear(animated: Bool) {
-    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
+    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem(), isFilter: true)
     
     collectionView.reloadData()
     updateSelectedCategoryView()
+    self.navigationItem.titleView = filterTitleView(false)
+    hideCategoryFilterView()
     filterGrayOverlay.hidden = true
   }
 
@@ -144,6 +146,7 @@ class StreamViewController: BaseViewController {
   }
   
   func doneButtonPressed() {
+    self.navigationItem.titleView = filterTitleView(false)
     hideCategoryFilterView()
     updateSelectedCategoryView()
   }
@@ -170,9 +173,12 @@ extension StreamViewController: UICollectionViewDataSource {
   }
   
   override func filterCategories() {
+    // Make sure this works when we close the filter view.
     if filterGrayOverlay.hidden {
+      self.navigationItem.titleView = filterTitleView(true)
       UIView.animateWithDuration(0.5, animations: addCategoryFilterView)
     } else {
+      self.navigationItem.titleView = filterTitleView(false)
       UIView.animateWithDuration(0.5, animations: hideCategoryFilterView)
     }
   }

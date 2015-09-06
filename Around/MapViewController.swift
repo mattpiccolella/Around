@@ -24,6 +24,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   var categoryFilterView: CategoryFilterView!
   
   var markerView: CustomMarkerView?
+  var triangleView: TriangleView?
   var locationManager: CLLocationManager = CLLocationManager()
   
   let composeButtonBottomPadding: CGFloat = 50.0
@@ -45,7 +46,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
+    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem(), isFilter: true)
     locationManager.delegate = self
     locationManager.startUpdatingLocation()
     mapView.delegate = self
@@ -66,7 +67,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   override func viewWillAppear(animated: Bool) {
-    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem())
+    formatTopLevelNavBar("FILTER", leftBarButton: leftBarButtonItem(), rightBarButton: rightBarButtonItem(), isFilter: true)
     if appDelegate.shouldRefreshStreamItems {
       fetchNewStreamItems() {
         self.addMapMarkers()
@@ -79,6 +80,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     }
     pickerGrayOverlay.hidden = true
     filterGrayOverlay.hidden = true
+    self.navigationItem.titleView = filterTitleView(false)
     hideCategoryFilterView()
     hideCategoryPickerView()
     // TODO: Look into consistency and other things.
@@ -89,9 +91,12 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   override func filterCategories() {
+    // Make sure this works when we close the filter view.
     if filterGrayOverlay.hidden {
+      self.navigationItem.titleView = filterTitleView(true)
       UIView.animateWithDuration(0.5, animations: addCategoryFilterView)
     } else {
+      self.navigationItem.titleView = filterTitleView(false)
       UIView.animateWithDuration(0.5, animations: hideCategoryFilterView)
     }
   }
@@ -170,6 +175,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   func mapViewTapped() {
     markerView?.removeFromSuperview()
     markerView = nil
+    triangleView?.removeFromSuperview()
+    triangleView = nil
   }
 
   @IBAction func currentLocationButtonPressed(sender: AnyObject) {
@@ -206,6 +213,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
     setupCategoryPickerView()
     markerView?.removeFromSuperview()
     markerView = nil
+    triangleView?.removeFromSuperview()
+    triangleView = nil
 
     pickerGrayOverlay.hidden = false
     categoryFilterView.removeFromSuperview()
@@ -239,6 +248,8 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   func addCategoryFilterView() {
     markerView?.removeFromSuperview()
     markerView = nil
+    triangleView?.removeFromSuperview()
+    triangleView = nil
     filterGrayOverlay.hidden = false
     categoryFilterView.selectedCategories = appDelegate.selectedCategories
     categoryFilterView.setupCategoryCells(self)
@@ -255,6 +266,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   }
   
   func doneButtonPressed() {
+    self.navigationItem.titleView = filterTitleView(false)
     hideCategoryFilterView()
   }
 }
@@ -307,6 +319,7 @@ extension MapViewController: MKMapViewDelegate {
   func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
     mapView.setCenterCoordinate(view.annotation.coordinate, animated: true)
     markerView?.removeFromSuperview()
+    triangleView?.removeFromSuperview()
     if !view.annotation.isKindOfClass(MKUserLocation.self) {
       if let streamItem: PFObject = findStreamItemById(view.annotation.title!) {
         let calloutHeight: CGFloat = CustomMarkerView.heightForView(streamItem)
@@ -317,6 +330,14 @@ extension MapViewController: MKMapViewDelegate {
         markerView = CustomMarkerView(frame: calloutFrame)
         markerView!.setupView(streamItem, location: appDelegate.location)
         markerView!.delegate = self
+        let triangleHeight: CGFloat = 12.0
+        let triangleWidth: CGFloat = 20.0
+        let triangleX: CGFloat = -triangleWidth / 2.0 + view.frame.size.width / 2.0
+        let triangleY: CGFloat = -11.0
+        let triangleFrame: CGRect = CGRectMake(triangleX, triangleY, triangleWidth, triangleHeight)
+        triangleView = TriangleView(frame: triangleFrame)
+        triangleView!.backgroundColor = UIColor.clearColor()
+        view.insertSubview(triangleView!, belowSubview: view)
         view.addSubview(markerView!)
       }
     }

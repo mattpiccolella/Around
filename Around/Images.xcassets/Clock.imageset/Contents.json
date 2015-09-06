@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Clock.png"
+      "filename" : "Clock(gray).png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Clock-1.png"
+      "filename" : "Clock(gray)-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Clock-2.png"
+      "filename" : "Clock(gray)-2.png"
     }
   ],
   "info" : {

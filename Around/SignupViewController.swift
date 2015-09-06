@@ -66,6 +66,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
     mapView.userInteractionEnabled = false
     mapView.delegate = self
     profilePictureButton.layer.cornerRadius = profilePictureButton.frame.size.width / 2.0
+    profilePictureButton.layer.masksToBounds = true
     setupFieldLogos()
     setupMapView()
     toggleSignup()

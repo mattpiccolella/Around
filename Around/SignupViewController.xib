@@ -284,7 +284,7 @@
     <resources>
         <image name="AddPhoto" width="150" height="150"/>
         <image name="Email" width="33" height="23"/>
-        <image name="Lock" width="26" height="32"/>
-        <image name="Profile" width="122" height="122"/>
+        <image name="Lock" width="17" height="22"/>
+        <image name="Profile" width="19" height="22"/>
     </resources>
 </document>

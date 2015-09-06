@@ -53,6 +53,7 @@ class StreamItemCell: UICollectionViewCell {
     if let postUser = streamItem["user"] as? PFObject {
       userName.text = postUser["name"] as? String
     }
+    // TODO: I believe this is very wrong.
     if let picture: PFFile = PFUser.currentUser()!["profilePicture"] as? PFFile {
       picture.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
         if error == nil {

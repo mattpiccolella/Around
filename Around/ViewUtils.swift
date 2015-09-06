@@ -35,3 +35,17 @@ func northWestCoordinate(mapRect: MKMapRect) -> CLLocationCoordinate2D {
 func southEastCoordinate(mapRect: MKMapRect) -> CLLocationCoordinate2D {
   return getCoordinateFromMapRectanglePoint(mapRect.origin.x, MKMapRectGetMaxY(mapRect))
 }
+
+func scaleImage(image: UIImage, scaleFactor: CGFloat) -> UIImage {
+  let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(scaleFactor, scaleFactor))
+  let hasAlpha = true
+  let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+  
+  UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+  image.drawInRect(CGRect(origin: CGPointZero, size: size))
+  
+  let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+  UIGraphicsEndImageContext()
+  
+  return scaledImage
+}
