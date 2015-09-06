@@ -40,7 +40,6 @@ class CustomMarkerView: UIView {
     userName.font = Styles.Fonts.Body.Normal.Medium
     distanceLabel.font = Styles.Fonts.Body.Medium.Large
     distanceLabel.textColor = View.AppColor
-    view.layer.cornerRadius = 5
     view.layer.masksToBounds = true
     moreInfoButton.enabled = true
   }
@@ -79,6 +78,9 @@ class CustomMarkerView: UIView {
     view.layer.cornerRadius = 5.0
     view.layer.borderWidth = 1.0
     view.layer.borderColor = Styles.Colors.MarkerBorder.CGColor
+    
+    userPhoto.layer.cornerRadius = userPhoto.frame.size.height / 2.0
+    userPhoto.layer.masksToBounds = true
   }
   
   func setupGestureRecognizer() {
