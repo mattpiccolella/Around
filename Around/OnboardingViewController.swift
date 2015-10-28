@@ -31,7 +31,7 @@ class OnboardingViewController: BaseViewController {
   var locationManager: CLLocationManager?
   var shouldRequestLocation: Bool = false
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -118,7 +118,7 @@ class OnboardingViewController: BaseViewController {
 }
 
 extension OnboardingViewController: CLLocationManagerDelegate {
-  func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+  func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
     if status != .NotDetermined {
       presentNextViewController()
     }
@@ -126,7 +126,7 @@ extension OnboardingViewController: CLLocationManagerDelegate {
 }
 
 extension OnboardingViewController: MKMapViewDelegate {
-  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
     if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
       pinView.annotation = annotation
       return pinView

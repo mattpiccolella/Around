@@ -30,7 +30,7 @@ class SelectedCategoryView: UIView {
     setupNibSubview()
   }
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     self.categories = []
     super.init(coder: aDecoder)
     setupNibSubview()
@@ -69,7 +69,7 @@ extension SelectedCategoryView: UICollectionViewDataSource {
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return count(categories)
+    return categories.count
   }
 }
 

@@ -23,7 +23,7 @@ class StreamViewController: BaseViewController {
   @IBOutlet var selectedCategoryHeight: NSLayoutConstraint!
   @IBOutlet var collectionViewTopSpacing: NSLayoutConstraint!
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -152,10 +152,10 @@ class StreamViewController: BaseViewController {
   }
   
   func updateSelectedCategoryView() {
-    selectedCategoryHeight.constant = count(appDelegate.selectedCategories) == 0 ? 0 : selectedCategoryDefaultHeight
+    selectedCategoryHeight.constant = appDelegate.selectedCategories.count == 0 ? 0 : selectedCategoryDefaultHeight
     selectedCategoryView.categories = appDelegate.selectedCategories
     selectedCategoryView.collectionView.reloadData()
-    collectionViewTopSpacing.constant = count(appDelegate.selectedCategories) == 0 ? 0 : selectedCategoryDefaultHeight
+    collectionViewTopSpacing.constant = appDelegate.selectedCategories.count == 0 ? 0 : selectedCategoryDefaultHeight
     view.layoutIfNeeded()
   }
 }
@@ -189,7 +189,7 @@ extension StreamViewController: CategoryCellActionDelegate {
     if added {
       appDelegate.selectedCategories.append(type)
     } else {
-      appDelegate.selectedCategories.removeAtIndex(find(appDelegate.selectedCategories, type)!)
+      appDelegate.selectedCategories.removeAtIndex(appDelegate.selectedCategories.indexOf(type)!)
     }
     filterStreamItems()
     collectionView.reloadData()

@@ -44,7 +44,7 @@ class CategoryCell: UIView {
     return view
   }
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupNibSubview()
   }

@@ -28,7 +28,7 @@ class WelcomeViewController: BaseViewController {
 
   var type: WelcomeViewType!
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -121,7 +121,7 @@ class WelcomeViewController: BaseViewController {
 }
 
 extension WelcomeViewController: MKMapViewDelegate {
-  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
     if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
       pinView.annotation = annotation
       return pinView

@@ -53,7 +53,7 @@ class BaseViewController: UIViewController {
     button.titleLabel?.sizeToFit()
     button.userInteractionEnabled = true
     let image = isFiltering ? UIImage(named: "UpArrowWhite") : UIImage(named: "DownArrowWhite")
-    let scaledImage = scaleImage(image!, 0.7)
+    let scaledImage = scaleImage(image!, scaleFactor: 0.7)
     button.setImage(scaledImage, forState: .Normal)
     button.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     button.titleLabel?.transform = CGAffineTransformMakeScale(-1.0, 1.0);
@@ -75,7 +75,7 @@ class BaseViewController: UIViewController {
   }
   
   func barButtonImage(image: UIImage?) -> UIButton {
-    let button: UIButton = UIButton.buttonWithType(.Custom) as! UIButton
+    let button: UIButton = UIButton(type: .Custom)
     button.frame = CGRectMake(0, 0, barButtonHeight, barButtonHeight)
     if image != nil {
       button.setImage(image, forState: .Normal) 
@@ -89,7 +89,7 @@ class BaseViewController: UIViewController {
   
   func leftBarButtonItem() -> UIBarButtonItem {
     let profileImage: UIImage = UIImage(named: "Back")!
-    let button: UIButton = UIButton.buttonWithType(.Custom) as! UIButton
+    let button: UIButton = UIButton(type: .Custom)
     button.frame = CGRectMake(0, 0, barButtonHeight, barButtonHeight)
     button.setImage(profileImage, forState: .Normal)
     button.addTarget(self, action: "leftButtonPushed", forControlEvents: .TouchUpInside)
@@ -98,7 +98,7 @@ class BaseViewController: UIViewController {
   }
   
   func fetchNewStreamItems(completion: (() -> Void)?) {
-    let query: PFQuery = getStreamItems(appDelegate.minPoint!, appDelegate.maxPoint!)
+    let query: PFQuery = getStreamItems(appDelegate.minPoint!, maxPoint: appDelegate.maxPoint!)
     query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
       self.appDelegate.streamItemArray = results as! Array<PFObject>
       self.filterStreamItems()
@@ -109,12 +109,12 @@ class BaseViewController: UIViewController {
   
   func filterStreamItems() {
     appDelegate.selectedStreamItems = []
-    if count(appDelegate.selectedCategories) == 0 {
+    if appDelegate.selectedCategories.count == 0 {
       appDelegate.selectedStreamItems = appDelegate.streamItemArray
     } else {
       for item in appDelegate.streamItemArray {
         if let type: StreamItemType = StreamItemType(rawValue: item["type"] as! String) {
-          if let index: Int = find(appDelegate.selectedCategories, type) {
+          if let index: Int = appDelegate.selectedCategories.indexOf(type) {
             appDelegate.selectedStreamItems.append(item)
           }
         }

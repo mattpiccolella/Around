@@ -47,14 +47,14 @@ class CategoryFilterView: UIView {
     return view
   }
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
   }
   
   func setupCategoryCells(delegate: CategoryCellActionDelegate) {
     let categories: [CategoryCell] = [categoryOne, categoryTwo, categoryThree, categoryFour, categoryFive, categorySix]
-    for i in 0...count(categories)-1 {
-      categories[i].setupCell(categoryNames[i], selected: find(selectedCategories, categoryNames[i]) != nil)
+    for i in 0...categories.count-1 {
+      categories[i].setupCell(categoryNames[i], selected: selectedCategories.indexOf(categoryNames[i]) != nil)
       categories[i].shouldUpdate = shouldUpdateCells
       categories[i].delegate = delegate
     }

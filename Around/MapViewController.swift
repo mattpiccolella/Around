@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: BaseViewController {
 
   @IBOutlet var pickerGrayOverlay: UIView!
   @IBOutlet var composeButton: UIButton!
@@ -32,7 +32,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   let navBarHeight: CGFloat = 64.0
   let pickerViewBottomPadding: CGFloat = 30.0
     
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
     
@@ -113,7 +113,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   
   func loadInitialStreamItems() {
     // Bad hack. We try to load only based off of whether there are any objects available.
-    if count(appDelegate.selectedStreamItems) == 0 {
+    if appDelegate.selectedStreamItems.count == 0 {
       fetchNewStreamItems() {
         self.addMapMarkers()
       }
@@ -260,7 +260,7 @@ class MapViewController: BaseViewController, CLLocationManagerDelegate, MKMapVie
   func hideCategoryFilterView() {
     filterGrayOverlay.hidden = true
     categoryFilterView.removeFromSuperview()
-    selectedCategoryView.hidden = count(appDelegate.selectedCategories) == 0
+    selectedCategoryView.hidden = appDelegate.selectedCategories.count == 0
     selectedCategoryView.categories = appDelegate.selectedCategories
     selectedCategoryView.collectionView.reloadData()
   }
@@ -285,17 +285,17 @@ extension MapViewController: CLLocationManagerDelegate {
     }
   }
   
-  func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+  func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
     // TODO: Check whether we can show some kind of error here.
   }
   
-  func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+  func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
     // TODO: Handle error.
   }
 }
 
 extension MapViewController: MKMapViewDelegate {
-  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
     if !annotation.isKindOfClass(MKUserLocation.self) {
       if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
         pinView.annotation = annotation
@@ -303,7 +303,7 @@ extension MapViewController: MKMapViewDelegate {
       } else {
         let newPinView: CustomAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseIdentifier)
         newPinView.canShowCallout = false
-        if let streamItemId: String = annotation.title {
+        if let streamItemId: String = annotation.title! {
           if let streamItem: PFObject = findStreamItemById(streamItemId) {
             let streamItemType: String = streamItem["type"] as! String
             newPinView.image = UIImage(named: "\(streamItemType)-Marker")
@@ -316,12 +316,12 @@ extension MapViewController: MKMapViewDelegate {
     }
   }
   
-  func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-    mapView.setCenterCoordinate(view.annotation.coordinate, animated: true)
+  func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    mapView.setCenterCoordinate(view.annotation!.coordinate, animated: true)
     markerView?.removeFromSuperview()
     triangleView?.removeFromSuperview()
-    if !view.annotation.isKindOfClass(MKUserLocation.self) {
-      if let streamItem: PFObject = findStreamItemById(view.annotation.title!) {
+    if !view.annotation!.isKindOfClass(MKUserLocation.self) {
+      if let streamItem: PFObject = findStreamItemById(view.annotation!.title!!) {
         let calloutHeight: CGFloat = CustomMarkerView.heightForView(streamItem)
         let calloutWidth: CGFloat = self.view.frame.size.width - 40.0
         let calloutX: CGFloat = -calloutWidth / 2.0 + view.frame.size.width / 2.0
@@ -343,7 +343,7 @@ extension MapViewController: MKMapViewDelegate {
     }
   }
   
-  func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+  func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
     if let annotationView: MKAnnotationView = mapView.viewForAnnotation(userLocation) {
       annotationView.canShowCallout = false
     }
@@ -368,7 +368,7 @@ extension MapViewController: CategoryCellActionDelegate {
       if added {
         appDelegate.selectedCategories.append(type)
       } else {
-        appDelegate.selectedCategories.removeAtIndex(find(appDelegate.selectedCategories, type)!)
+        appDelegate.selectedCategories.removeAtIndex(appDelegate.selectedCategories.indexOf(type)!)
       }
     }
     filterStreamItems()

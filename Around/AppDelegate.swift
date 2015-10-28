@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
     
   func loggedOutView() -> UIViewController {
-    var onboarded = NSUserDefaults.standardUserDefaults().boolForKey(hasOnboarded)
+    let onboarded = NSUserDefaults.standardUserDefaults().boolForKey(hasOnboarded)
     let type: WelcomeViewType = onboarded ? .Onboarded : .First
     let welcomeViewController: WelcomeViewController = WelcomeViewController(nibName: "WelcomeViewController", type: type)
     let navController: UINavigationController = UINavigationController(rootViewController: welcomeViewController)

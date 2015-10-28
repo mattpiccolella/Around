@@ -25,7 +25,7 @@ class UserSettingsViewController: BaseViewController {
   
   var actionDelegate: UserSettingsActionDelegate!
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -133,10 +133,10 @@ extension UserSettingsViewController: UICollectionViewDelegate {
     case 1:
     switch indexPath.row {
     case 0:
-      println("Decide on actual action")
+      print("Decide on actual action")
       // TODO: Implement handler for this once we decide what it is.
     case 1:
-      println("Decide on actual action")
+      print("Decide on actual action")
       // TODO: Implement handler for this once we decide what it is.
     case 2:
       actionDelegate.signOut()
@@ -173,19 +173,19 @@ extension UserSettingsViewController: UICollectionViewDelegateFlowLayout {
 extension UserSettingsViewController: UserSettingsActionDelegate {
   func handleFacebookLink() {
     // TODO: Implement
-    println("Handle Facebook Link - Not Implemented")
+    print("Handle Facebook Link - Not Implemented")
   }
   func handleTwitterLink() {
     // TODO: Implement
-    println("Handle Twitter Link - Not Implemented")
+    print("Handle Twitter Link - Not Implemented")
   }
   func changeEmail() {
     // TODO: Implement
-    println("Change Email - Not Implemented")
+    print("Change Email - Not Implemented")
   }
   func handleProfileChange() {
     // TODO: Implement
-    println("Handle Profile Change - Not Implemented")
+    print("Handle Profile Change - Not Implemented")
   }
   func viewPostHistory() {
     let postHistoryController: PostHistoryViewController = PostHistoryViewController(nibName: "PostHistoryViewController", bundle: nil)
@@ -193,7 +193,7 @@ extension UserSettingsViewController: UserSettingsActionDelegate {
   }
   func changePassword() {
     // TODO: Implement
-    println("Change Password - Not Implemented")
+    print("Change Password - Not Implemented")
   }
   func signOut() {
     PFUser.logOut()

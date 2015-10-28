@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SignupViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class SignupViewController: BaseViewController, UINavigationControllerDelegate, UITextFieldDelegate {
 
   let bottomKeyboardSpacing: CGFloat = 8.0
   let topBottomTermsPadding: CGFloat = 90.0
@@ -33,7 +33,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
 
   @IBOutlet var profilePictureButton: UIButton!
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -108,7 +108,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
   }
   
   func toggleSignup() {
-    navigationItem.rightBarButtonItem?.enabled = count(emailAddress.text) > 0 && count(password.text) > 0 && count(name.text) > 0
+    navigationItem.rightBarButtonItem?.enabled = emailAddress.text!.characters.count > 0 && password.text!.characters.count > 0 && name.text!.characters.count > 0
   }
   
   @IBAction func performPrimaryAction(sender: AnyObject) {
@@ -121,7 +121,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
       if success {
         self.appDelegate.window!.rootViewController = self.appDelegate.loggedInView()
       } else {
-        println("\(error)")
+        print("\(error)")
       }
     }
   }
@@ -166,7 +166,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
       if success {
         self.appDelegate.window!.rootViewController = self.appDelegate.loggedInView()
       } else {
-        println("\(error)")
+        print("\(error)")
       }
     }
   }
@@ -196,7 +196,7 @@ class SignupViewController: BaseViewController, UIImagePickerControllerDelegate,
 extension SignupViewController: UIImagePickerControllerDelegate {
   func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
     let imageData = UIImageJPEGRepresentation(image, 0.7)
-    profilePicture = PFFile(data: imageData)
+    profilePicture = PFFile(data: imageData!)
     profilePictureButton.setBackgroundImage(image, forState: .Normal)
     profilePictureButton.setBackgroundImage(image, forState: .Selected)
     // TODO: Figure out why the image isn't a circle here.
@@ -206,7 +206,7 @@ extension SignupViewController: UIImagePickerControllerDelegate {
 }
 
 extension SignupViewController: MKMapViewDelegate {
-  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
     if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
       pinView.annotation = annotation
       return pinView

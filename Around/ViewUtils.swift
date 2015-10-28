@@ -29,11 +29,11 @@ func getCoordinateFromMapRectanglePoint(x: Double, y: Double) -> CLLocationCoord
 }
 
 func northWestCoordinate(mapRect: MKMapRect) -> CLLocationCoordinate2D {
-  return getCoordinateFromMapRectanglePoint(MKMapRectGetMaxX(mapRect), mapRect.origin.y);
+  return getCoordinateFromMapRectanglePoint(MKMapRectGetMaxX(mapRect), y: mapRect.origin.y);
 }
 
 func southEastCoordinate(mapRect: MKMapRect) -> CLLocationCoordinate2D {
-  return getCoordinateFromMapRectanglePoint(mapRect.origin.x, MKMapRectGetMaxY(mapRect))
+  return getCoordinateFromMapRectanglePoint(mapRect.origin.x, y: MKMapRectGetMaxY(mapRect))
 }
 
 func scaleImage(image: UIImage, scaleFactor: CGFloat) -> UIImage {

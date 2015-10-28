@@ -42,7 +42,7 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
   
   var type: StreamItemType!
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -133,7 +133,7 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
   }
   
   func togglePostButton() {
-    navigationItem.rightBarButtonItem?.enabled = count(textView.text) > 0 && photoSelected
+    navigationItem.rightBarButtonItem?.enabled = textView.text.characters.count > 0 && photoSelected
   }
   
   // MARK: Subviews
@@ -186,12 +186,12 @@ class ComposeStreamItemViewController: BaseViewController, UINavigationControlle
   }
   
   func initialDate() -> NSDate {
-    var dateComp : NSDateComponents = NSDateComponents()
+    let dateComp : NSDateComponents = NSDateComponents()
     dateComp.hour = 1
     dateComp.minute = 0
     dateComp.timeZone = NSTimeZone.systemTimeZone()
-    var calendar : NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    var date : NSDate = calendar.dateFromComponents(dateComp)!
+    let calendar : NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+    let date : NSDate = calendar.dateFromComponents(dateComp)!
     return date
   }
   
@@ -241,18 +241,18 @@ extension ComposeStreamItemViewController: UITextViewDelegate {
 extension ComposeStreamItemViewController: UIImagePickerControllerDelegate {
   func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
     let imageData = UIImageJPEGRepresentation(image, 0.7)
-    postPhoto = PFFile(data: imageData)
+    postPhoto = PFFile(data: imageData!)
     photoSelected = true
     addPhotoIcon.image = image
     dismissViewControllerAnimated(true, completion: nil)
     addPhotoLabel.text = "Photo added"
     addPhotoLabel.textColor = View.AppColor
-    navigationItem.rightBarButtonItem?.enabled = count(textView.text) > 0 && photoSelected
+    navigationItem.rightBarButtonItem?.enabled = textView.text.characters.count > 0 && photoSelected
   }
 }
 
 extension ComposeStreamItemViewController: MKMapViewDelegate {
-  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
     if !annotation.isKindOfClass(MKUserLocation.self) {
       if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
         pinView.annotation = annotation

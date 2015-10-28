@@ -15,12 +15,12 @@ class TriangleView : UIView {
     super.init(frame: frame)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
   override func drawRect(rect: CGRect) {
-    var context: CGContextRef = UIGraphicsGetCurrentContext()
+    let context: CGContextRef = UIGraphicsGetCurrentContext()!
     
     CGContextBeginPath(context)
     CGContextMoveToPoint(context, CGRectGetMinX(rect), CGRectGetMinY(rect))
@@ -31,6 +31,6 @@ class TriangleView : UIView {
     
     CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0, 1.0)
     CGContextSetStrokeColorWithColor(context, Styles.Colors.MarkerBorder.CGColor)
-    CGContextDrawPath(context, kCGPathFillStroke)
+    CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
   }
 }

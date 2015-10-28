@@ -23,7 +23,7 @@ class LoginViewController: BaseViewController {
   @IBOutlet var forgotPasswordButton: UIButton!
   @IBOutlet var bottomSpacingConstraint: NSLayoutConstraint!
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -88,7 +88,7 @@ class LoginViewController: BaseViewController {
   }
   
   func toggleLogin() {
-    navigationItem.rightBarButtonItem?.enabled = count(emailField.text) > 0 && count(passwordField.text) > 0
+    navigationItem.rightBarButtonItem?.enabled = emailField.text!.characters.count > 0 && passwordField.text!.characters.count > 0
   }
   
   // MARK: Keyboard changes
@@ -111,11 +111,11 @@ class LoginViewController: BaseViewController {
   }
   
   func performLogin() {
-    PFUser.logInWithUsernameInBackground(emailField.text, password: passwordField.text) { (currentUser, error) -> Void in
+    PFUser.logInWithUsernameInBackground(emailField.text!, password: passwordField.text!) { (currentUser, error) -> Void in
       if currentUser != nil {
         self.appDelegate.window!.rootViewController = self.appDelegate.loggedInView()
       } else {
-        println("\(error)")
+        print("\(error)")
       }
     }
   }
@@ -126,7 +126,7 @@ class LoginViewController: BaseViewController {
 }
 
 extension LoginViewController: MKMapViewDelegate {
-  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
     if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
       pinView.annotation = annotation
       return pinView

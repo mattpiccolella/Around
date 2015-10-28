@@ -41,7 +41,7 @@ class StreamItemViewController: BaseViewController, UIGestureRecognizerDelegate 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -91,20 +91,20 @@ class StreamItemViewController: BaseViewController, UIGestureRecognizerDelegate 
   func setupButtons() {
     favoriteButton.layer.cornerRadius = 6.0
     favoriteButton.layer.borderWidth = 1.0
-    favoriteButton.layer.borderColor = View.AppColor.CGColor!
+    favoriteButton.layer.borderColor = View.AppColor.CGColor
     favoriteButton.titleLabel?.font = Styles.Fonts.Body.Normal.Large
     favoriteButton.tintColor = View.AppColor
     reportButton.layer.cornerRadius = 6.0
     reportButton.layer.borderWidth = 1.0
-    reportButton.layer.borderColor = View.AppColor.CGColor!
+    reportButton.layer.borderColor = View.AppColor.CGColor
     reportButton.titleLabel?.font = Styles.Fonts.Body.Normal.Large
     reportButton.tintColor = View.AppColor
-    reportButton.setImage(scaleImage(UIImage(named: "Trash")!, 0.8), forState: .Normal)
+    reportButton.setImage(scaleImage(UIImage(named: "Trash")!, scaleFactor: 0.8), forState: .Normal)
     reportButton.imageEdgeInsets = UIEdgeInsetsMake(0, -12, 0, 0)
     if distance < upvoteCutoff {
       favoriteButton.setTitle("Upvote", forState: .Normal)
       favoriteButton.setTitle("Upvote", forState: .Selected)
-      favoriteButton.setImage(scaleImage(UIImage(named: "Upvote")!, 0.7), forState: .Normal)
+      favoriteButton.setImage(scaleImage(UIImage(named: "Upvote")!, scaleFactor: 0.7), forState: .Normal)
       favoriteButton.imageEdgeInsets = UIEdgeInsetsMake(0, -12, 0, 0)
     } else {
       favoriteButton.setTitle("Get Directions", forState: .Normal)
@@ -125,7 +125,7 @@ class StreamItemViewController: BaseViewController, UIGestureRecognizerDelegate 
     imageInfo.referenceRect = postPhoto.frame
     imageInfo.referenceView = postPhoto.superview
     let imageViewer: JTSImageViewController = JTSImageViewController(imageInfo: imageInfo, mode: JTSImageViewControllerMode.Image, backgroundStyle: JTSImageViewControllerBackgroundOptions.None)
-    imageViewer.showFromViewController(self, transition: ._FromOriginalPosition)
+    imageViewer.showFromViewController(self, transition: .FromOriginalPosition)
   }
   
   func addDataForStreamItem() {
@@ -197,7 +197,7 @@ class StreamItemViewController: BaseViewController, UIGestureRecognizerDelegate 
 }
 
 extension StreamItemViewController: MKMapViewDelegate {
-  func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+  func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
     if !annotation.isKindOfClass(MKUserLocation.self) {
       if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseIdentifier) {
         pinView.annotation = annotation

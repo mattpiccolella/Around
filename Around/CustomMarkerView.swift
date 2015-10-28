@@ -44,7 +44,7 @@ class CustomMarkerView: UIView {
     moreInfoButton.enabled = true
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupNibSubview()
   }
